@@ -1,0 +1,84 @@
+# Assumptions (variables and values) for the digital CO2 footprint calculator
+# These values can be overridden by user input in the app, but these are the defaults.
+# If you add a new variable here, you also need to:
+# add a description (and source, if any) in translations.py
+# add it to the list of editable variables in the sidebar in app.py 
+# use it in the calculations in calculator.py
+
+device_percent: 
+  # Percentage of total device usage time attributed to each device type.
+  # Default values coming from EvoSapiens' YouTube stats pulled on 2025-08-25
+  computer: 28.5
+  smartphone: 57.3 
+  tablet: 4.6
+  tv: 9.6
+
+device_production_kg_co2e:
+  # Average CO2 equivalent emissions (in kilograms) for the production of each device type.
+  computer: 175.0
+  smartphone: 84 
+  tablet: 75.9 
+  tv: 360
+device_lifetime_hours:
+  # Average lifetime of each device type in hours
+  computer: 4416.5 # laptops especially, not much data for desktop computers
+  smartphone: 3558.75
+  tablet: 821.25
+  tv: 11680.00
+device_watts:
+  # Average power consumption (in watts) for each device type during use.
+  computer: 9.54 # laptops especially, not much data for desktop computers
+  smartphone: 4.76
+  tablet: 5.21
+  tv: 139.5
+co2e_per_kWh: 0.044  # Average CO2 equivalent emissions (in kilograms) per kWh of electricity consumed in your country (default value here is for France)
+network_kwh_per_gb:
+  # Energy consumption of each network (kWh / GB)
+  fixed: 0.005 
+  mobile: 0.103
+network_kwh_per_user_per_hour:
+  # Energy consumption of the fixed network, per user per hour (kWh). 
+  # Values obtained by dividing kWh / user / year by number of hours per year considered by Arcom (712 for mobile and 3564 for fixed) 
+  fixed: 0.0306  # 21.8/712
+  mobile: 0.0331 # 117.8/3564
+datacenter_kg_co2e:
+  # Data center emissions (kg CO2e). Careful, units really are kg CO2e and not kWh.
+  per_GB: 0.000609 # per GB of data transferred 
+  per_hour: 0.000327 # per hour of video streamed 
+
+video_bitrate_GB_per_hour: 
+  # Average data usage (in GB/h) for streaming each video resolution.
+  480p: 0.6
+  1080p: 3.0 
+  2160p: 7.0
+
+# Default weekly hours of online video watched by the user
+# This is used as the initial value in the UI and as a fallback if not overridden.
+hours_input: 30
+
+# New: percent of time spent on fixed network per device (0 = always mobile, 100 = always fixed)
+fixed_network_percent:
+  # Source: Arcom, P110
+  computer: 100
+  smartphone: 50
+  tablet: 100
+  tv: 100
+
+# New: per-network resolution percents (each group should sum to 100)
+fixed_network_resolution_percent:
+  # Source: Arcom, table 45
+  480p: 0
+  1080p: 100
+  2160p: 0
+
+mobile_network_resolution_percent:
+  # Source: Arcom, table 45
+  480p: 100
+  1080p: 0
+  2160p: 0
+co2e_offsetting:
+  # how much CO2e you save for various actions
+  electric_vs_thermic_vehicle: 0.1 # driving an electric vehicle instead of a thermic vehicle saves 0.1 kg CO2e per km on average
+  no_meat_meal_vs_chicken_meal: 1.0 # eating a vegeterian meal instead of a meal with chicken saves 1 kg CO2e on average
+
+
