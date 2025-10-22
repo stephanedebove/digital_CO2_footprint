@@ -39,8 +39,8 @@ network_kwh_per_gb:
 network_kwh_per_user_per_hour:
   # Energy consumption of the fixed network, per user per hour (kWh). 
   # Values obtained by dividing kWh / user / year by number of hours per year considered by Arcom (712 for mobile and 3564 for fixed) 
-  fixed: 0.0306  # 21.8/712
-  mobile: 0.0331 # 117.8/3564
+  fixed: 0.0331  # 117.8/3564
+  mobile: 0.0306 # 21.8/712
 datacenter_kg_co2e:
   # Data center emissions (kg CO2e). Careful, units really are kg CO2e and not kWh.
   per_GB: 0.000609 # per GB of data transferred 
@@ -48,9 +48,9 @@ datacenter_kg_co2e:
 
 video_bitrate_GB_per_hour: 
   # Average data usage (in GB/h) for streaming each video resolution.
-  480p: 0.6
-  1080p: 3.0 
-  2160p: 7.0
+  480p: 0.495
+  1080p: 2.25 
+  2160p: 9.0
 
 # Default weekly hours of online video watched by the user
 # This is used as the initial value in the UI and as a fallback if not overridden.
@@ -66,19 +66,19 @@ fixed_network_percent:
 
 # New: per-network resolution percents (each group should sum to 100)
 fixed_network_resolution_percent:
-  # Source: Arcom, table 45
+  # Source: Estimé à partir d'Arcom, table 45
   480p: 0
-  1080p: 100
-  2160p: 0
+  1080p: 89
+  2160p: 11
 
 mobile_network_resolution_percent:
-  # Source: Arcom, table 45
+  # Source: Estimé à partir d'Arcom, table 45
   480p: 100
   1080p: 0
   2160p: 0
 co2e_offsetting:
   # how much CO2e you save for various actions
-  electric_vs_thermic_vehicle: 0.1 # driving an electric vehicle instead of a thermic vehicle saves 0.1 kg CO2e per km on average
-  no_meat_meal_vs_chicken_meal: 1.0 # eating a vegeterian meal instead of a meal with chicken saves 1 kg CO2e on average
+  electric_vs_thermic_vehicle: 0.114 # driving an electric vehicle instead of a thermic vehicle saves 0.1 kg CO2e per km on average
+  no_meat_meal_vs_chicken_meal: 1.08 # eating a vegeterian meal instead of a meal with chicken saves 1 kg CO2e on average
 
 
