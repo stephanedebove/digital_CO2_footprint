@@ -1,7 +1,6 @@
 import re
 from typing import Dict
 
-
 _LANG = "fr"
 
 # quels appareils utilisez-vous pour regarder des vidéos (4 options) ?
