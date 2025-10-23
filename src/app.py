@@ -1,7 +1,6 @@
 from typing import Optional
 
 import streamlit as st
-from loguru import logger
 
 from calculator import calculate_co2e_offsetting, compute_total_kg_co2e
 from loader import Assumptions, load_assumptions

@@ -66,13 +66,13 @@ fixed_network_percent:
 
 # New: per-network resolution percents (each group should sum to 100)
 fixed_network_resolution_percent:
-  # Source: Estimé à partir d'Arcom, table 45
+  # Source: estimated from Arcom, table 45
   480p: 0
   1080p: 89
   2160p: 11
 
 mobile_network_resolution_percent:
-  # Source: Estimé à partir d'Arcom, table 45
+  # Source: estimated from Arcom, table 45
   480p: 100
   1080p: 0
   2160p: 0

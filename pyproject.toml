@@ -2,13 +2,12 @@
 name = "digital_CO2_footprint"
 version = "0.1.0"
 description = "Calculate digital video streaming CO2 footprint with a Streamlit UI"
-authors = ["Stéphane Debove"]
+authors = ["Stéphane Debove et Rodolphe Meyer"]
 readme = "README.md"
 packages = [{ include = "*", from = "src" }]
 
 [tool.poetry.dependencies]
 python = ">=3.12,<4.0.0"
-loguru = ">=0.7.3,<0.8.0"
 streamlit = ">=1.38.0,<2.0.0"
 pyyaml = ">=6.0.2,<7.0.0"
 

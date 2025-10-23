@@ -1,7 +1,6 @@
 import re
 from typing import Dict
 
-from loguru import logger
 
 _LANG = "fr"
 
