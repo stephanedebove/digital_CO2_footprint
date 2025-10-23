@@ -359,6 +359,11 @@ def render_sidebar(assumptions: Assumptions) -> Assumptions:
     with st.sidebar.expander(T("secondary_assumptions_edit"), expanded=False):
         render_assumptions_section(assumptions, secondary_assumptions, st.number_input)
 
+    st.sidebar.markdown(
+        f"<span style='font-size: 0.8em; color: gray;'>{T('device_computer_note')}</span>",
+        unsafe_allow_html=True,
+    )
+
     st.session_state["assumptions"] = assumptions
     return assumptions
 

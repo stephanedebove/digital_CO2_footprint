@@ -218,8 +218,17 @@ def compute_total_kg_co2e(
 
     # Convert user-provided hours to annual hours
     # Both roles use weekly hours; results are per year
-    hours_per_year = assumptions["hours_input"] * 52.0
+    if role == "consumer":
+        hours_per_year = assumptions["hours_input"] * 52.0
+        hours_unit = "h/semaine"
+        annual_multiplier_text = " et 52 semaines"
+    else:
+        hours_per_year = assumptions["hours_input"]
+        hours_unit = "h/an"
+        annual_multiplier_text = ""
     intermediate_values["hours_input"] = assumptions["hours_input"]
+    intermediate_values["hours_unit"] = hours_unit
+    intermediate_values["annual_multiplier_text"] = annual_multiplier_text
     intermediate_values["hours_input_year"] = hours_per_year
 
     intermediate_values["network_kwh_per_video_hour_total"] = sum(

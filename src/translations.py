@@ -13,13 +13,13 @@ _LANG = "fr"
 _TEXTS: Dict[str, Dict[str, str]] = {
     "fr": {
         # main page:
-        "page_title": "Calculateur d’impact climatique du streaming",
+        "page_title": "Calculateur d’impact climatique du visionnage de vidéos en ligne",
         "producer": "Je produis des vidéos",
         "consumer": "Je regarde des vidéos",
-        "producer_help": "Combien d’heures votre chaîne a-t-elle été visionnée ces sept derniers jours (YouTube Studio -> Données analytiques -> Aperçu, et sélectionner « 7 derniers jours » en haut à droite) ",
+        "producer_help": "Combien d’heures de vidéos votre chaîne a-t-elle été visionnée au cours de l’année dernière  (YouTube Studio → Données analytiques → Aperçu, et sélectionner « 365 derniers jours » en haut à droite) ?",
         "consumer_help": "Combien d’heures de vidéos regardez-vous par semaine ? (oui, y compris le porno)",
         "consumer_weekly_hours": "Heures / semaine ",
-        "producer_watch_hours": "(en heures)",
+        "producer_watch_hours": "(en heures par an)",
         "compute_button": "Calculer",
         "result_total_kg": "Émissions",
         "result_total_kg_year": "Émissions",
@@ -46,7 +46,7 @@ _TEXTS: Dict[str, Dict[str, str]] = {
             → **Total {network_kwh_per_video_hour_total:.4f} kWh/h**, soit **{network_co2_per_video_hour_total:.4f} kg CO2e/h**.\n\n
 
             3. CO2e émis par les centres de données. Pour un visionnage de {gb_per_hour_total_weighted:.2f} Go/h en moyenne, cela représente {datacenter_co2_per_video_hour_transfer:.4f} kg CO2e/h pour le stockage + {datacenter_co2_per_video_hour_runtime:.4f} kg/h pour le visionnage = **{datacenter_co2_per_video_hour_total:.4f} kg/h**.\n\n
-          Une heure de vidéo visionnée émet donc {kg_per_video_hour_total:.4f} kg CO2e / h. Multiplié par la valeur de {hours_input:,.2f} h/semaine que vous avez entrée et 52 semaines, cela donne **{total_kg_co2e:,.2f} kg CO2e/an**.
+          Une heure de vidéo visionnée émet donc {kg_per_video_hour_total:.4f} kg CO2e / h. Multiplié par la valeur de {hours_input:,.2f} {hours_unit} que vous avez entrée{annual_multiplier_text}, cela donne **{total_kg_co2e:,.2f} kg CO2e/an**.
             """
         ),
         "even_more_details_subheader": "Encore plus de détails ?",
@@ -112,7 +112,7 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         
       Tout ceci nous donne des émissions de {device_production_co2_per_video_hour_total_plus_energy:.6f} kg CO2e / h pour les appareils + {network_co2_per_video_hour_total:.6f} kg CO2e / h pour les réseaux, et {datacenter_co2_per_video_hour_total:.6f} kg CO2e / h pour les centres de données, soit  {kg_per_video_hour_total:.6f} kg CO2e / h au total.
         
-      **Multiplié par {hours_input:.2f} heures de visionnage par semaine × 52 semaines = {total_kg_co2e:,.2f} kg par an.**
+      **Multiplié par {hours_input:.2f} {hours_unit}{annual_multiplier_text} = {total_kg_co2e:,.2f} kg par an.**
         
             Répartis comme suit : 
 
@@ -134,6 +134,7 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         "device_percent_tv": "TV",
         "device_percent_check": "(NB: si le total est inférieur à 100%, le pourcentage d’ordinateur sera augmenté pour les atteindre.)",
         "device_percent_error": "Le pourcentage total est de {percent:.1f}%. Veuillez le réduire à moins de 100%.",
+        "device_computer_note": "*Par manque de données, on considère que tous les ordinateurs sont des ordinateurs portables. La production d'un ordinateur de bureau génère souvent plus de CO2e mais celui-ci est amorti sur une durée plus longue. La consommation électrique d'un ordinateur de bureau est aussi souvent plus élevée que celle d'un ordinateur portable mais l'impact de la consommation électrique est minoritaire dans l'impact total.",
         "resolution_percent": "À quelles résolutions sont regardées les vidéos (en % du temps total) ?",
         "resolution_percent_480p": "480p",
         "resolution_percent_1080p": "HD 1080p",
