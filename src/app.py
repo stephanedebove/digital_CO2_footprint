@@ -96,7 +96,7 @@ def render_source(variable: str) -> None:
 
     # Display "Source:" and the source text on the same line, smaller font
     st.markdown(
-        f"<span style='font-size:0.85em; color:gray;'>Source(s) pour les valeurs par défaut : </span>"
+        f"<span style='font-size:0.85em; color:gray;'>{T('source_text')}</span>"
         f"<span style='font-size:0.85em'>{linkify_urls(src_val)}</span>",
         unsafe_allow_html=True,
     )

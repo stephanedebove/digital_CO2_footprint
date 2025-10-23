@@ -212,6 +212,209 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         "offsetting_table_with_production": "qui prennent en compte le CO2 à la production",
         "electric_vs_thermic_vehicle_display": "Conduire {x} kms en voiture électrique plutôt que thermique.",
         "no_meat_meal_vs_chicken_meal_display": "Remplacer {x} repas avec poulet par un repas végétarien.",
+        "source_text": "Source(s) pour les valeurs par défaut : ",
+    },
+    "en": {
+        "page_title": "Climate impact calculator for online video streaming",
+        "producer": "I produce videos",
+        "consumer": "I watch videos",
+        "producer_help": "How many hours of videos has your channel been watched over the past year (YouTube Studio → Analytics → Overview, and select 'Last 365 days' in the top right)?",
+        "consumer_help": "How many hours of videos do you watch per week? (yes, including adult content)",
+        "consumer_weekly_hours": "Hours / week",
+        "producer_watch_hours": "(in hours per year)",
+        "compute_button": "Calculate",
+        "result_total_kg": "Emissions",
+        "result_total_kg_year": "Emissions",
+        "unit_per_year": "kg of CO2e per year",
+        "result_with_production_prefix": "Including the CO2e emitted to produce the devices used to watch videos (smartphone, computer, tablet, TV...), this corresponds to:",
+        "result_without_production_prefix": "\nExcluding the CO2e emitted to produce the devices, this corresponds to:",
+        "result_explanation": "\nExplanation: Most of the CO2e is emitted during the manufacturing of the devices used to watch videos, and this impact is spread over the lifespan of these devices. If you do not wish to include this (i.e., you want to know the **marginal** carbon impact of watching videos), only consider the second figure.\n\n\n\nThese estimates are based on typical data for a user located in France, but many factors can cause variations. The most important ones:\n\n  - If you keep your devices for a very long time before replacing them, your impact will decrease. For example, based on ARCOM data, we assume that a smartphone is replaced on average every 2.5 years with 3.9 hours of daily use.\n\n  - Fixed internet networks (at home, whether via Ethernet cable or Wi-Fi) consume 20 times less energy per GB transferred than mobile networks (4G/5G). If you mostly watch videos on a fixed network, your carbon footprint will be lower (and vice versa!).\n\n  - The resolution of the videos watched also has a significant impact. Generally, the default resolution of video players is lower on smartphones than on PCs. If you mostly watch videos on mobile (without forcing HD resolution), this works in your favor.\n\n  - Finally, the calculations assume French electricity, which is low-carbon thanks to nuclear and renewable energy. If you watch videos from another country, the impact will be higher.\n\n  All these parameters can be adjusted in the left sidebar, and you can better understand how they influence the calculations below.",
+        "details_subheader": "How were these figures calculated?",
+        "details_expander": "Let's see...",
+        "details_text": (
+            """
+    The total CO2e emissions are divided into three parts:\n\n
+    1. CO2e emitted by the devices used to watch videos (smartphone, computer, TV, tablet), not only during their manufacturing but also during their usage (electricity consumption).
+    2. CO2e emitted by the networks transferring the videos (two types of networks: mobile 4G/5G, or fixed at home via Ethernet/Wi-Fi). This CO2 includes a variable part, dependent on the volume of data transmitted, and a fixed part per user and per hour of usage. Note: mobile networks emit significantly more CO2e than fixed networks (up to 20 times more CO2 per GB transferred).
+    3. CO2e emitted by the data centers storing the videos, which also includes a part proportional to the GB transferred and a part dependent on the number of hours watched.\n\n
+    Specifically, for the values entered in the left sidebar, this gives:\n\n
+    1. CO2e emitted by devices = CO2e emitted during production allocated per hour of usage + electricity consumed per hour of usage = {device_production_co2_per_video_hour_total:.4f} + {device_energy_co2_per_video_hour_total:.4f} = **{device_production_co2_per_video_hour_total_plus_energy:.4f} kg CO2e/h**.\n\n
+    2. For CO2e emitted by networks, assuming:\n\n
+    - That you use fixed networks {network_share_fixed:.1f}% of the time, and mobile networks {network_share_mobile:.1f}% of the time, across all devices.
+    - That on fixed networks, you watch in 480p {fixed_network_resolution_percent_480p:.0f}% of the time, in 1080p {fixed_network_resolution_percent_1080p:.0f}% of the time, and in 4K {fixed_network_resolution_percent_2160p:.0f}% of the time.
+    - That on mobile networks, you watch in 480p {mobile_network_resolution_percent_480p:.0f}% of the time, in 1080p {mobile_network_resolution_percent_1080p:.0f}% of the time, and in 4K {mobile_network_resolution_percent_2160p:.0f}% of the time.\n
+    This results in an average data rate for fixed networks of {gb_per_hour_fixed:.2f} GB/h, and for mobile networks of {gb_per_hour_mobile:.2f} GB/h, leading to an energy consumption for fixed networks of {network_kwh_per_video_hour_fixed:.4f} kWh/h, and for mobile networks of {network_kwh_per_video_hour_mobile:.4f} kWh/h 
+    
+    → **Total {network_kwh_per_video_hour_total:.4f} kWh/h**, or **{network_co2_per_video_hour_total:.4f} kg CO2e/h**.\n\n
+
+    3. CO2e emitted by data centers. For an average viewing rate of {gb_per_hour_total_weighted:.2f} GB/h, this represents {datacenter_co2_per_video_hour_transfer:.4f} kg CO2e/h for storage + {datacenter_co2_per_video_hour_runtime:.4f} kg/h for viewing = **{datacenter_co2_per_video_hour_total:.4f} kg/h**.\n\n
+    Watching one hour of video emits {kg_per_video_hour_total:.4f} kg CO2e/h. Multiplied by the value of {hours_input:,.2f} {hours_unit} you entered{annual_multiplier_text}, this gives **{total_kg_co2e:,.2f} kg CO2e/year**.
+    """
+        ),
+        "even_more_details_subheader": "Want even more details?",
+        "even_more_details_expander": "I love that!",
+        "even_more_details_text": """
+    Hungry for more? Here are all the calculation steps. All values can be customized in the left sidebar.
+
+    1. CO2e related to devices (production + electricity usage)
+
+        a. CO2e from the production of each device, allocated per hour of usage = (CO2e emitted during production / device lifespan in hours). For example:
+
+            - Computer: ({device_production_kg_co2e_computer:.2f} / {device_lifetime_hours_computer:.0f}) × {device_percent_computer:.1f}% = {device_production_co2_per_video_hour_by_device_computer:.6f} kg/h
+            - Smartphone: ({device_production_kg_co2e_smartphone:.2f} / {device_lifetime_hours_smartphone:.0f}) × {device_percent_smartphone:.1f}% = {device_production_co2_per_video_hour_by_device_smartphone:.6f} kg/h
+            - Tablet: ({device_production_kg_co2e_tablet:.2f} / {device_lifetime_hours_tablet:.0f}) × {device_percent_tablet:.1f}% = {device_production_co2_per_video_hour_by_device_tablet:.6f} kg/h
+            - TV: ({device_production_kg_co2e_tv:.2f} / {device_lifetime_hours_tv:.0f}) × {device_percent_tv:.1f}% = {device_production_co2_per_video_hour_by_device_tv:.6f} kg/h
+
+            **Total for device production = {device_production_co2_per_video_hour_total:.6f} kg CO2e/h.**
+
+        b. Electricity usage: for each device, CO2e emitted = (device power consumption in Wh/h / 1000) × CO2e emitted per kWh. To get the weighted average, multiply by the usage share of each device:
+
+            - Computer: {device_percent_computer:.1f}% × ({device_watts_computer:.2f}/1000) = {device_energy_kwh_per_video_hour_by_device_computer:.6f} kWh/h
+            ⇒ {device_energy_co2_per_video_hour_by_device_computer:.6f} kg/h
+            - Smartphone: {device_percent_smartphone:.1f}% × ({device_watts_smartphone:.2f}/1000) = {device_energy_kwh_per_video_hour_by_device_smartphone:.6f} kWh/h 
+            ⇒ {device_energy_co2_per_video_hour_by_device_smartphone:.6f} kg/h
+            - Tablet: {device_percent_tablet:.1f}% × ({device_watts_tablet:.2f}/1000) = {device_energy_kwh_per_video_hour_by_device_tablet:.6f} kWh/h 
+            ⇒ {device_energy_co2_per_video_hour_by_device_tablet:.6f} kg/h
+            - TV: {device_percent_tv:.1f}% × ({device_watts_tv:.2f}/1000) = {device_energy_kwh_per_video_hour_by_device_tv:.6f} kWh/h 
+            ⇒ {device_energy_co2_per_video_hour_by_device_tv:.6f} kg/h
+
+            **Total emissions for device electricity usage = {device_energy_kwh_per_video_hour_total:.6f} kWh/h 
+            ⇒ {device_energy_co2_per_video_hour_total:.6f} kg CO2e/h.**
+
+        **Total emissions related to devices = {device_production_co2_per_video_hour_total:.6f} + {device_energy_co2_per_video_hour_total:.6f} = {device_production_co2_per_video_hour_total_plus_energy:.6f} kg/h.**
+
+2. CO2e related to networks (fixed and mobile)
+
+    a. Average usage share of fixed/mobile networks calculated based on the networks used by each device: {network_share_fixed:.1f}% viewing on fixed, {network_share_mobile:.1f}% on mobile.
+
+    b. Average data volume per network per hour (GB/h) = Σ (GB/h for resolution × share of that resolution on the network).
+
+    - Fixed: {video_bitrate_GB_per_hour_480p:.2f}×{fixed_network_resolution_percent_480p:.0f}% (480p) + {video_bitrate_GB_per_hour_1080p:.2f}×{fixed_network_resolution_percent_1080p:.0f}% (HD) + {video_bitrate_GB_per_hour_2160p:.2f}×{fixed_network_resolution_percent_2160p:.0f}% (4K) = {gb_per_hour_fixed:.4f} GB/h.
+    - Mobile: {video_bitrate_GB_per_hour_480p:.2f}×{mobile_network_resolution_percent_480p:.0f}% (480p) + {video_bitrate_GB_per_hour_1080p:.2f}×{mobile_network_resolution_percent_1080p:.0f}% (HD) + {video_bitrate_GB_per_hour_2160p:.2f}×{mobile_network_resolution_percent_2160p:.0f}% (4K) = {gb_per_hour_mobile:.4f} GB/h.
+
+    c. For each network, based on the ARCOM study (see sources in the left sidebar), energy consumption is of the form kWh/h = a×GB/h + b/h, where b is a per-user hourly consumption.
+
+    - Fixed network: a={network_a_kwh_per_gb_fixed:.5f}, b={network_b_kwh_per_user_hour_fixed:.5f} ⇒ {network_kwh_per_video_hour_fixed:.6f} kWh/h.
+    - Mobile network: a={network_a_kwh_per_gb_mobile:.5f}, b={network_b_kwh_per_user_hour_mobile:.5f} ⇒ {network_kwh_per_video_hour_mobile:.6f} kWh/h.
+
+    d. Weighted by usage share (fixed {network_share_fixed:.1f}%, mobile {network_share_mobile:.1f}%):
+
+    Fixed network = {network_kwh_per_video_hour_fixed:.6f} kWh/h.
+    Mobile network = {network_kwh_per_video_hour_mobile:.6f} kWh/h.
+
+    Total network consumption: {network_kwh_per_video_hour_total:.6f} kWh/h, or **{network_co2_per_video_hour_total:.6f} kg CO2e/h** (CO2e emissions per kWh: {co2e_per_kWh:.4f}).
+
+3. CO2e related to data centers: also of the form c×GB/h + d/h.
+
+        a. Proportional to GB transferred (these GB are determined by the fixed/mobile network share): c×GB/h = {datacenter_kg_co2e_per_GB:.6f}×{gb_per_hour_total_weighted:.4f} = {datacenter_co2_per_video_hour_transfer:.6f} kg/h.
+
+        b. Proportional to viewing time: d = {datacenter_kg_co2e_per_hour:.6f} kg/h.
+
+        c. Total = {datacenter_co2_per_video_hour_transfer:.6f} + {datacenter_co2_per_video_hour_runtime:.6f} = **{datacenter_co2_per_video_hour_total:.6f} kg/h.**
+
+This gives us emissions of {device_production_co2_per_video_hour_total_plus_energy:.6f} kg CO2e/h for devices + {network_co2_per_video_hour_total:.6f} kg CO2e/h for networks, and {datacenter_co2_per_video_hour_total:.6f} kg CO2e/h for data centers, for a total of {kg_per_video_hour_total:.6f} kg CO2e/h.
+
+**Multiplied by {hours_input:.2f} {hours_unit}{annual_multiplier_text} = {total_kg_co2e:,.2f} kg per year.**
+
+    Distributed as follows: 
+
+        - Device production: {production_co2_total:,.2f} kg
+        - Device electricity consumption: {device_energy_co2_total:,.2f} kg
+        - Networks: {network_co2_total:,.2f} kg 
+        - Data centers: {datacenter_co2_total:,.2f} kg
+""",
+        # sidebar:
+        "language_label": "Language",
+        "main_assumptions_header": "Main assumptions",
+        "main_assumptions_edit": "Edit",
+        "secondary_assumptions_header": "Secondary assumptions",
+        "secondary_assumptions_edit": "Edit",
+        "device_percent": "Which devices do you use to watch videos (share, in %)?",
+        "device_percent_computer": "Computer*",
+        "device_percent_smartphone": "Smartphone",
+        "device_percent_tablet": "Tablet",
+        "device_percent_tv": "TV",
+        "device_percent_check": "(Note: If the total is less than 100%, the computer percentage will be increased to make up the difference.)",
+        "device_percent_error": "The total percentage is {percent:.1f}%. Please reduce it to less than 100%.",
+        "device_computer_note": "*Due to lack of data, all computers are assumed to be laptops. Desktop computers often generate more CO2e during production, but this is offset by their longer lifespan. Desktop computers also tend to consume more electricity than laptops, but electricity consumption is a minor factor in the total impact.",
+        "resolution_percent": "At what resolutions do you watch videos (as a percentage of total time)?",
+        "resolution_percent_480p": "480p",
+        "resolution_percent_1080p": "HD 1080p",
+        "resolution_percent_2160p": "4K 2160p",
+        "resolution_percent_check": "(Note: If the total is less than 100%, the 1080p percentage will be increased to make up the difference.)",
+        "resolution_percent_error": "The total percentage is {percent:.1f}%. Please reduce it to 100%.",
+        "device_production_kg_co2e": "CO2 emissions from device manufacturing (in kg of CO2)",
+        "device_production_kg_co2e_source": "https://datavizta.boavizta.org/terminalimpact (representative of an average device, but significant variations may exist between devices, especially TVs).",
+        "device_production_kg_co2e_computer": "Computer*",
+        "device_production_kg_co2e_smartphone": "Smartphone",
+        "device_production_kg_co2e_tablet": "Tablet",
+        "device_production_kg_co2e_tv": "TV",
+        "device_lifetime_hours": "Average lifespan of each device (in hours of use)",
+        "device_lifetime_hours_source": "Arcom, 2024. Study on the environmental impact of audiovisual usage in France. Pages 73 to 78 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=73",
+        "device_lifetime_hours_computer": "Computer*",
+        "device_lifetime_hours_smartphone": "Smartphone",
+        "device_lifetime_hours_tablet": "Tablet",
+        "device_lifetime_hours_tv": "TV",
+        "device_watts": "Average power consumption of devices when used to watch videos (in Wh/h)",
+        "device_watts_source": "Arcom, 2024. Study on the environmental impact of audiovisual usage in France. Pages 73 to 78 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=73",
+        "device_watts_computer": "Computer*",
+        "device_watts_smartphone": "Smartphone",
+        "device_watts_tablet": "Tablet",
+        "device_watts_tv": "TV",
+        "video_bitrate_GB_per_hour": "Average bitrates by resolution (GB / hour)",
+        "video_bitrate_GB_per_hour_source": "https://esimatic.com/blog/how-much-data-youtube-use (consistent with ARCOM HD bitrate of 2.25GB/h https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=223)",
+        "video_bitrate_GB_per_hour_480p": "480p",
+        "video_bitrate_GB_per_hour_1080p": "HD 1080p",
+        "video_bitrate_GB_per_hour_2160p": "4K 2160p",
+        "network_kwh_per_gb": "Network energy consumption (kWh / GB)",
+        "network_kwh_per_gb_source": "Arcom, 2024. Study on the environmental impact of audiovisual usage in France. Table 23 P85 and Table 25 P87. https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=85",
+        "network_kwh_per_gb_fixed": "Fixed network (Wi-Fi or Ethernet)",
+        "network_kwh_per_gb_mobile": "Mobile network (4G/5G)",
+        "hours_spent_on_network_per_year": "Number of hours spent on each network per year.",
+        "hours_spent_on_network_per_year_source": "Arcom, 2024. Study on the environmental impact of audiovisual usage in France. Table 95 P223 and Table 96 P224. https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=223",
+        "hours_spent_on_network_per_year_fixed": "Fixed network (Wi-Fi or Ethernet)",
+        "hours_spent_on_network_per_year_mobile": "Mobile network (4G/5G)",
+        "network_kwh_per_user_per_hour": "Network energy consumption per user per hour (kWh / user / hour).",
+        "network_kwh_per_user_per_hour_source": "Arcom, 2024. Study on the environmental impact of audiovisual usage in France. Table 23 P85 and Table 25 P86. Values obtained by dividing kWh/user/year by the number of hours per year considered by Arcom. https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=85",
+        "network_kwh_per_user_per_hour_fixed": "Fixed network (Wi-Fi or Ethernet)",
+        "network_kwh_per_user_per_hour_mobile": "Mobile network (4G/5G)",
+        "fixed_network_percent": "Share of usage on fixed networks (Ethernet or Wi-Fi at home, as opposed to 4G/5G) by device (in %)",
+        "fixed_network_percent_source": "Arcom, 2024. Study on the environmental impact of audiovisual usage in France. P110 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=110",
+        "fixed_network_percent_computer": "Computer*",
+        "fixed_network_percent_smartphone": "Smartphone",
+        "fixed_network_percent_tablet": "Tablet",
+        "fixed_network_percent_tv": "TV",
+        "fixed_network_resolution_percent": "Resolution distribution on fixed networks",
+        "fixed_network_resolution_percent_source": "Arcom, 2024. Study on the environmental impact of audiovisual usage in France. Calculated to be consistent with Table 45 P112 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=112",
+        "fixed_network_resolution_percent_480p": "480p",
+        "fixed_network_resolution_percent_1080p": "HD 1080p",
+        "fixed_network_resolution_percent_2160p": "4K 2160p",
+        "mobile_network_resolution_percent": "Resolution distribution on mobile networks (sum = 100%)",
+        "mobile_network_resolution_percent_source": "Arcom, 2024. Study on the environmental impact of audiovisual usage in France. Calculated to be consistent with Table 45 P112 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=112",
+        "mobile_network_resolution_percent_480p": "480p",
+        "mobile_network_resolution_percent_1080p": "HD 1080p",
+        "mobile_network_resolution_percent_2160p": "4K 2160p",
+        # Validation messages for resolution percents per network
+        "fixed_network_resolution_percent_check": "(Note: If the total is less than 100%, the 1080p share will be increased to reach 100%.)",
+        "fixed_network_resolution_percent_error": "The current total share is {percent:.1f}%. Please reduce it to 100%.",
+        "mobile_network_resolution_percent_check": "(Note: If the total is less than 100%, the 1080p share will be increased to reach 100%.)",
+        "mobile_network_resolution_percent_error": "The current total share is {percent:.1f}%. Please reduce it to 100%.",
+        "co2e_per_kWh": "CO2e emissions per kWh of electricity consumed (kg CO2e / kWh).",
+        "co2e_per_kWh_source": "https://ourworldindata.org/grapher/carbon-intensity-electricity?tab=chart&country=FRA",
+        "datacenter_kg_co2e": "CO2e emissions from data centers.",
+        "datacenter_kg_co2e_source": "Arcom, 2024. Study on the environmental impact of audiovisual usage in France. Table 38 P102, Table 56 and 57 P130. https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=102",
+        "datacenter_kg_co2e_per_GB": "per GB of data transferred (kg CO2e / GB).",
+        "datacenter_kg_co2e_per_hour": "per hour of video watched (kg CO2e / hour).",
+        "co2e_offsetting": "Offsets",
+        "co2e_offsetting_source": "https://impactco2.fr/outils/comparateur#simulateur",
+        "co2e_offsetting_electric_vs_thermic_vehicle": "CO2e avoided per km driven in an electric vehicle compared to a thermal vehicle (kg CO2e / km)",
+        "co2e_offsetting_no_meat_meal_vs_chicken_meal": "CO2 avoided by eating a vegetarian meal instead of chicken (kg CO2e / meal)",
+        "co2e_offsetting_title": "Examples of actions you could take to offset your emissions...",
+        "offsetting_table_usage_only": "that do not account for production CO2",
+        "offsetting_table_with_production": "that account for production CO2",
+        "electric_vs_thermic_vehicle_display": "Drive {x} km in an electric car instead of a thermal car.",
+        "no_meat_meal_vs_chicken_meal_display": "Replace {x} chicken meals with vegetarian meals.",
+        "source_text": "Source(s) for default values: ",
     },
 }
 
