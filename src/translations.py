@@ -13,7 +13,7 @@ _LANG = "fr"
 _TEXTS: Dict[str, Dict[str, str]] = {
     "fr": {
         # main page:
-        "page_title": "Calculateur d’impact CO2 du visionnage de vidéos sur internet",
+        "page_title": "Calculateur d’impact climatique du streaming",
         "producer": "Je produis des vidéos",
         "consumer": "Je regarde des vidéos",
         "producer_help": "Combien d’heures votre chaîne a-t-elle été visionnée ces sept derniers jours (YouTube Studio -> Données analytiques -> Aperçu, et sélectionner « 7 derniers jours » en haut à droite) ",
@@ -26,18 +26,18 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         "unit_per_year": "kg de CO2e par an",
         "result_with_production_prefix": "En prenant en compte le CO2e émis pour produire les appareils servant à regarder les vidéos (smartphone, ordinateur, tablette, TV...), cela correspond à :",
         "result_without_production_prefix": "\nSans prendre en compte le CO2e émis pour produire les appareils, cela correspond à :",
-        "result_explanation": "\nExplication : la majorité du CO2e est émis lors de la fabrication des appareils servant à regarder les vidéos. Si vous ne souhaitez pas le prendre en compte (ie, que vous cherchez à connaître l’impact carbone **marginal** du visionnage de vidéos), ne considérez que le deuxième chiffre.\n\nCes estimations ont été faites sur la base de données types pour un utilisateur situé en France, mais de nombreux paramètres peuvent les faire varier. Les plus importants :\n\n  - Si vous conservez vos appareils très longtemps avant d’en changer, vous ferez baisser votre impact. À titre d’exemple, en suivant les données de l’ARCOM, nous considérons qu’un smartphone est en moyenne changé après 2,5 années à raison de 3,9h d’utilisation par jour.\n\n  - Le réseau internet fixe (à domicile, qu’il s’agisse de filaire éthernet ou de Wifi) consomme jusqu’à 20 fois moins d’énergie par Go transféré que le réseau mobile (4G/5G). Si vous regardez surtout des vidéos sur le réseau fixe, votre bilan carbone sera donc plus faible (et inversement !).\n\n  - La résolution des vidéos regardée a également un impact important. En général, la résolution automatique des lecteurs de vidéos est moins élevée sur smartphone que PC. Si vous regardez surtout des vidéos sur mobile (sans forcer la résolution à HD), cela joue en votre faveur.\n\n  - Enfin, les calculs supposent une électricité relativement peu carbonée, comme c’est le cas en France grâce notamment au nucléaire. Si vous regardez des vidéos depuis un autre pays, le bilan carbone pourrait être bien différent.\n\n  Tous ces paramètres sont modifiables dans la barre de gauche, vous pouvez mieux comprendre comment ils influent dans les calculs ci-dessous.",
+        "result_explanation": "\nExplication : la majorité du CO2e est émis lors de la fabrication des appareils servant à regarder les vidéos et cet impact est réparti sur la durée de vie de ces appareils. Si vous ne souhaitez pas le prendre en compte (ie, que vous cherchez à connaître l’impact carbone **marginal** du visionnage de vidéos), ne considérez que le deuxième chiffre.\n\n\n\nCes estimations ont été faites sur la base de données types pour un utilisateur situé en France, mais de nombreux paramètres peuvent les faire varier. Les plus importants :\n\n  - Si vous conservez vos appareils très longtemps avant d’en changer, vous ferez baisser votre impact. À titre d’exemple, en suivant les données de l’ARCOM, nous considérons qu’un smartphone est en moyenne changé après 2,5 années à raison de 3,9h d’utilisation par jour.\n\n  - Le réseau internet fixe (à domicile, qu’il s’agisse de filaire éthernet ou de Wifi) consomme 20 fois moins d’énergie par Go transféré que le réseau mobile (4G/5G). Si vous regardez surtout des vidéos sur le réseau fixe, votre bilan carbone sera donc plus faible (et inversement !).\n\n  - La résolution des vidéos regardée a également un impact important. En général, la résolution automatique des lecteurs de vidéos est moins élevée sur smartphone que PC. Si vous regardez surtout des vidéos sur mobile (sans forcer la résolution à HD), cela joue en votre faveur.\n\n  - Enfin, les calculs supposent une électricité française et donc peu carbonée grâce au nucléaire et aux renouvelables. Si vous regardez des vidéos depuis un autre pays, l'impact sera plus élevé.\n\n  Tous ces paramètres sont modifiables dans la barre de gauche, vous pouvez mieux comprendre comment ils influent dans les calculs ci-dessous.",
         "details_subheader": "Comment ces chiffres ont-t-il été obtenus ?",
         "details_expander": "Voyons voir...",
         "details_text": (
             """
-            Le CO2 total émis se décompose en trois parties:\n\n
-            1. CO2 émis par les appareils utilisés pour regarder les vidéos (smartphone, ordinateur, TV, tablette), non seulement pendant leur fabrication mais aussi pendant leur utilisation (électricité consommée).
-            2. CO2 émis par les réseaux transférant les vidéos (deux types de réseaux : mobile 4G/5G, ou fixe à la maison éthernet/wifi). Ce CO2 contient une part variable, dépendante du volume de données transmises, et une part fixe par utilisateur et par heure d’utilisation. À savoir : le réseau mobile est bien plus émetteur de CO2 que le réseau fixe (jusqu’à 20 fois plus de CO2 émis par Go transféré).
-            3. CO2 émis par les centres de données stockant les vidéos, qui contient également une part proportionnelle aux Go transférés et une part dépendante du nombre d’heures visionnées.\n\n
+            Le CO2e total émis se décompose en trois parties:\n\n
+            1. CO2e émis par les appareils utilisés pour regarder les vidéos (smartphone, ordinateur, TV, tablette), non seulement pendant leur fabrication mais aussi pendant leur utilisation (électricité consommée).
+            2. CO2e émis par les réseaux transférant les vidéos (deux types de réseaux : mobile 4G/5G, ou fixe à la maison éthernet/wifi). Ce CO2 contient une part variable, dépendante du volume de données transmises, et une part fixe par utilisateur et par heure d’utilisation. À savoir : le réseau mobile est bien plus émetteur de CO2e que le réseau fixe (jusqu’à 20 fois plus de CO2 émis par Go transféré).
+            3. CO2e émis par les centres de données stockant les vidéos, qui contient également une part proportionnelle aux Go transférés et une part dépendante du nombre d’heures visionnées.\n\n
             Concrètement, et pour les valeurs renseignées dans la barre de gauche, cela donne:\n\n
-            1. CO2 émis par les appareils = CO2 émis à la production ramené à une heure d’utilisation + électricité consommée pour une heure d’utilisation = {device_production_co2_per_video_hour_total:.4f} + {device_energy_co2_per_video_hour_total:.4f} = **{device_production_co2_per_video_hour_total_plus_energy:.4f} kg CO2e/h**.\n\n
-            2. Pour le CO2 émis par les réseaux, en supposant :\n\n
+            1. CO2e émis par les appareils = CO2e émis à la production ramené à une heure d’utilisation + électricité consommée pour une heure d’utilisation = {device_production_co2_per_video_hour_total:.4f} + {device_energy_co2_per_video_hour_total:.4f} = **{device_production_co2_per_video_hour_total_plus_energy:.4f} kg CO2e/h**.\n\n
+            2. Pour le CO2e émis par les réseaux, en supposant :\n\n
             - Que vous utilisez le réseau fixe {network_share_fixed:.1f}% du temps, le réseau mobile {network_share_mobile:.1f}% du temps, tous appareils confondus.
             - Que sur le réseau fixe, vous regardez en 480p {fixed_network_resolution_percent_480p:.0f}% du temps, en 1080p {fixed_network_resolution_percent_1080p:.0f}% du temps, en 4K {fixed_network_resolution_percent_2160p:.0f}% du temps.
             - Que sur le réseau mobile, vous regardez en 480p {mobile_network_resolution_percent_480p:.0f}% du temps, en 1080p {mobile_network_resolution_percent_1080p:.0f}% du temps, en 4K {mobile_network_resolution_percent_2160p:.0f}% du temps.\n
@@ -45,7 +45,7 @@ _TEXTS: Dict[str, Dict[str, str]] = {
             
             → **Total {network_kwh_per_video_hour_total:.4f} kWh/h**, soit **{network_co2_per_video_hour_total:.4f} kg CO2e/h**.\n\n
 
-            3. CO2 émis par les centres de données. Pour un visionnage de {gb_per_hour_total_weighted:.2f} Go/h en moyenne, cela représente {datacenter_co2_per_video_hour_transfer:.4f} kg CO2e/h pour le stockage + {datacenter_co2_per_video_hour_runtime:.4f} kg/h pour le visionnage = **{datacenter_co2_per_video_hour_total:.4f} kg/h**.\n\n
+            3. CO2e émis par les centres de données. Pour un visionnage de {gb_per_hour_total_weighted:.2f} Go/h en moyenne, cela représente {datacenter_co2_per_video_hour_transfer:.4f} kg CO2e/h pour le stockage + {datacenter_co2_per_video_hour_runtime:.4f} kg/h pour le visionnage = **{datacenter_co2_per_video_hour_total:.4f} kg/h**.\n\n
           Une heure de vidéo visionnée émet donc {kg_per_video_hour_total:.4f} kg CO2e / h. Multiplié par la valeur de {hours_input:,.2f} h/semaine que vous avez entrée et 52 semaines, cela donne **{total_kg_co2e:,.2f} kg CO2e/an**.
             """
         ),
@@ -56,7 +56,7 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         
             1. CO2e lié aux appareils (production + électricité à l’usage)
         
-               a. CO2 lié à la production de chaque appareil, ramené à une heure d’utilisation = (CO2 émis à la production / durée de vie de l’appareil en heures). Soit :
+               a. CO2e lié à la production de chaque appareil, ramené à une heure d’utilisation = (CO2e émis à la production / durée de vie de l’appareil en heures). Soit :
         
                   - Ordinateur: ({device_production_kg_co2e_computer:.2f} / {device_lifetime_hours_computer:.0f}) × {device_percent_computer:.1f}% = {device_production_co2_per_video_hour_by_device_computer:.6f} kg/h
                   - Smartphone: ({device_production_kg_co2e_smartphone:.2f} / {device_lifetime_hours_smartphone:.0f}) × {device_percent_smartphone:.1f}% = {device_production_co2_per_video_hour_by_device_smartphone:.6f} kg/h
@@ -65,7 +65,7 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         
                   **Total pour la production des appareils = {device_production_co2_per_video_hour_total:.6f} kg CO2e / h.**
         
-               b. Électricité à l’usage : pour chaque appareil, CO2 émis = (Wh/h appareil / 1000) * CO2 émis par kWh. Puis pour obtenir l’émission moyenne pondérée, multiplier par la part d’utilisation de chaque appareil : 
+               b. Électricité à l’usage : pour chaque appareil, CO2e émis = (Wh/h appareil / 1000) * CO2e émis par kWh. Puis pour obtenir l’émission moyenne pondérée, multiplier par la part d’utilisation de chaque appareil : 
         
                   - Ordinateur: {device_percent_computer:.1f}% × ({device_watts_computer:.2f}/1000) = {device_energy_kwh_per_video_hour_by_device_computer:.6f} kWh / h
                   ⇒ {device_energy_co2_per_video_hour_by_device_computer:.6f} kg/h
@@ -81,7 +81,7 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         
                **Total des émissions liées aux appareils = {device_production_co2_per_video_hour_total:.6f} + {device_energy_co2_per_video_hour_total:.6f} = {device_production_co2_per_video_hour_total_plus_energy:.6f} kg/h.**
         
-        2. CO2 lié aux réseaux (fixe et mobile)
+        2. CO2e lié aux réseaux (fixe et mobile)
         
           a. Part d'usage réseau fixe/ réseau mobile moyenne calculée à partir des réseaux utilisés pour chaque appareil : {network_share_fixed:.1f}% de visionnage en fixe, {network_share_mobile:.1f}% en mobile.
         
@@ -128,7 +128,7 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         "secondary_assumptions_header": "Hypothèses secondaires",
         "secondary_assumptions_edit": "Modifier",
         "device_percent": "Quels appareils utilisez-vous pour regarder des vidéos (part, en %) ?",
-        "device_percent_computer": "Ordinateur (portable ou fixe)",
+        "device_percent_computer": "Ordinateur*",
         "device_percent_smartphone": "Smartphone",
         "device_percent_tablet": "Tablette",
         "device_percent_tv": "TV",
@@ -142,19 +142,19 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         "resolution_percent_error": "Le pourcentage total est de {percent:.1f}%. Veuillez le réduire à moins de 100%.",
         "device_production_kg_co2e": "Émissions CO2 dues à la fabrication des appareils (en kg de CO2)",
         "device_production_kg_co2e_source": "https://datavizta.boavizta.org/terminalimpact (représentatif d'un appareil moyen, mais d’importantes disparités peuvent exister entre appareils, notamment pour les télévisions).",
-        "device_production_kg_co2e_computer": "Ordinateur (portable)",
+        "device_production_kg_co2e_computer": "Ordinateur*",
         "device_production_kg_co2e_smartphone": "Smartphone",
         "device_production_kg_co2e_tablet": "Tablette",
         "device_production_kg_co2e_tv": "TV",
         "device_lifetime_hours": "Durée de vie moyenne de chaque appareil (en heures d’utilisation)",
         "device_lifetime_hours_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. P73 à P78 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=73",
-        "device_lifetime_hours_computer": "Ordinateur (portable)",
+        "device_lifetime_hours_computer": "Ordinateur*",
         "device_lifetime_hours_smartphone": "Smartphone",
         "device_lifetime_hours_tablet": "Tablette",
         "device_lifetime_hours_tv": "TV",
         "device_watts": "Consommation électrique moyenne des appareils lorsqu’ils sont utilisés pour regarder des vidéos (en Wh/h)",
         "device_watts_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. P73 à P78 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=73",
-        "device_watts_computer": "Ordinateur (portable)",
+        "device_watts_computer": "Ordinateur*",
         "device_watts_smartphone": "Smartphone",
         "device_watts_tablet": "Tablette",
         "device_watts_tv": "TV",
@@ -163,7 +163,7 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         "video_bitrate_GB_per_hour_480p": "480p",
         "video_bitrate_GB_per_hour_1080p": "HD 1080p",
         "video_bitrate_GB_per_hour_2160p": "4K 2160p",
-        "network_kwh_per_gb": "Consommation énergétique des réseaux (kWh / GB)",
+        "network_kwh_per_gb": "Consommation énergétique des réseaux (kWh / Go)",
         "network_kwh_per_gb_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. Tableau 23 P85 et tableau 25 P87. https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=85",
         "network_kwh_per_gb_fixed": "Réseau fixe (Wi-Fi ou éthernet)",
         "network_kwh_per_gb_mobile": "Réseau mobile (4G/5G)",
@@ -178,18 +178,18 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         # New per-device fixed network percent (0..100)
         "fixed_network_percent": "Part d’utilisation sur réseau fixe (ethernet ou wifi à la maison, par opposition à 4G/5G) selon l’appareil (en %)",
         "fixed_network_percent_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. P110 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=110",
-        "fixed_network_percent_computer": "Ordinateur (portable ou fixe)",
+        "fixed_network_percent_computer": "Ordinateur*",
         "fixed_network_percent_smartphone": "Smartphone",
         "fixed_network_percent_tablet": "Tablette",
         "fixed_network_percent_tv": "TV",
         # P73 à P78 New per-network resolution mixes as percents (each group sums to 100)
         "fixed_network_resolution_percent": "Répartition des résolutions sur réseau fixe",
-        "fixed_network_resolution_percent_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. Tableau 45 P112 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=112",
+        "fixed_network_resolution_percent_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. Calculé pour être cohérent avec le Tableau 45 P112 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=112",
         "fixed_network_resolution_percent_480p": "480p",
         "fixed_network_resolution_percent_1080p": "HD 1080p",
         "fixed_network_resolution_percent_2160p": "4K 2160p",
         "mobile_network_resolution_percent": "Répartition des résolutions sur réseau mobile (somme = 100%)",
-        "mobile_network_resolution_percent_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. Tableau 45 P112 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=112",
+        "mobile_network_resolution_percent_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. Calculé pour être cohérent avec le Tableau 45 P112 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=112",
         "mobile_network_resolution_percent_480p": "480p",
         "mobile_network_resolution_percent_1080p": "HD 1080p",
         "mobile_network_resolution_percent_2160p": "4K 2160p",
@@ -202,7 +202,7 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         "co2e_per_kWh_source": "https://ourworldindata.org/grapher/carbon-intensity-electricity?tab=chart&country=FRA",
         "datacenter_kg_co2e": "Émissions de CO2e des centres de données.",
         "datacenter_kg_co2e_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. Tableau 38 P102, Tableau 56 et 57 P130. https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=102",
-        "datacenter_kg_co2e_per_GB": "par GB de données transférées (kg CO2e / GB).",
+        "datacenter_kg_co2e_per_GB": "par Go de données transférées (kg CO2e / Go).",
         "datacenter_kg_co2e_per_hour": "par heure de vidéo visionnée (kg CO2e / heure).",
         "co2e_offsetting": "Compensations",
         "co2e_offsetting_source": "https://impactco2.fr/outils/comparateur#simulateur",
