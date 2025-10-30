@@ -1,3 +1,4 @@
+import copy
 from typing import Optional
 
 import altair as alt
@@ -599,6 +600,71 @@ def render_page(role: str, assumptions: Assumptions) -> None:
 
         # Explanation paragraph
         st.write(localize_decimals_in_text(T("result_explanation")))
+
+        st.write(T("alternative_behaviors"))
+
+        # Compute alternative scenarios
+        # Scenario 1: Longer device lifetime (twice as long)
+        alt_assumptions1 = copy.deepcopy(assumptions)
+        alt_assumptions1.device_lifetime_years = {
+            k: v * 2 for k, v in assumptions.device_lifetime_years.items()
+        }
+        _, kg_alt1, _ = compute_total_kg_co2e(alt_assumptions1, role=role)
+
+        # Scenario 2: Only Wi-Fi
+        alt_assumptions2 = copy.deepcopy(assumptions)
+        alt_assumptions2.fixed_network_percent = {
+            k: 100.0 for k in assumptions.fixed_network_percent
+        }
+        _, kg_alt2, _ = compute_total_kg_co2e(alt_assumptions2, role=role)
+
+        # Scenario 3: Only 480p
+        alt_assumptions3 = copy.deepcopy(assumptions)
+        alt_assumptions3.fixed_network_resolution_percent = {
+            "480p": 100.0,
+            "1080p": 0.0,
+            "2160p": 0.0,
+        }
+        alt_assumptions3.mobile_network_resolution_percent = {
+            "480p": 100.0,
+            "1080p": 0.0,
+            "2160p": 0.0,
+        }
+        _, kg_alt3, _ = compute_total_kg_co2e(alt_assumptions3, role=role)
+
+        # Current
+        kg_current = kg_emitted_with_production
+
+        # Create bar chart for alternatives
+        behavior_order = [
+            T("current_behavior"),
+            T("only_wifi"),
+            T("only_480p"),
+            T("longer_device_lifetime"),
+        ]
+        alternative_data = pd.DataFrame(
+            {
+                "Behavior": behavior_order,
+                "Emissions": [kg_current, kg_alt2, kg_alt3, kg_alt1],
+            }
+        )
+
+        alt_chart = (
+            alt.Chart(alternative_data)
+            .mark_bar()
+            .encode(
+                x=alt.X(
+                    "Behavior:N",
+                    axis=alt.Axis(labelAngle=0, labelLimit=300, title=None),
+                    sort=behavior_order,
+                ),
+                y=alt.Y("Emissions:Q", title=T("unit_per_year")),
+                color=alt.value("#4CAF50"),
+            )
+            .properties(height=400, width=600)
+        )
+
+        st.altair_chart(alt_chart, use_container_width=True)
 
         assumptions_flattened = flatten_assumptions(assumptions.__dict__)
         st.subheader(T("details_subheader"))
