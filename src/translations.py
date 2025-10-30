@@ -230,10 +230,10 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         "no_meat_meal_vs_beef_meal_display": "🥩 Remplacer {x} repas avec du bœuf par des repas végétarien.",
         "tap_water_vs_beer_wine_display": "🍺 Boire {x} verres d'eau du robinet au lieu de verres de bière/vin.",
         "source_text": "Source(s) pour les valeurs par défaut : ",
-        "alternative_behaviors": "À titre d’exemple, voilà comment vos émissions seraient modifiées si vous ne regardiez des vidéos que sur le wifi, et si vous ne les regardiez qu’en résolution 480p (ce qui pour beaucoup de contenus est suffisant, surtout pour les petits écrans), ou si vous renouveliez vos appareils deux fois moins souvent, :",
+        "alternative_behaviors": "À titre d’exemple, voilà comment vos émissions seraient modifiées si vous ne regardiez des vidéos que sur le wifi, que en 480p (ce qui pour beaucoup de contenus est suffisant, surtout sur petits écrans), ou si vous renouveliez vos appareils deux fois moins souvent :",
         "current_behavior": "Comportement actuel",
-        "longer_device_lifetime": "Changer d’appareils deux fois moins souvent",
-        "only_wifi": "Que en Wi-Fi",
+        "longer_device_lifetime": "Garder ses appareils 2x plus longtemps",
+        "only_wifi": "Que sur Wi-Fi",
         "only_480p": "Que en 480p",
     },
     "en": {
