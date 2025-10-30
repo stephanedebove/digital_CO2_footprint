@@ -1,5 +1,6 @@
 from typing import Optional
 
+import altair as alt
 import pandas as pd
 import streamlit as st
 
@@ -522,15 +523,44 @@ def render_page(role: str, assumptions: Assumptions) -> None:
 
         # Emissions breakdown chart
         st.subheader(T("emissions_breakdown_title"))
-        emissions_data = pd.DataFrame({
-            "Category": [T("emissions_production"), T("emissions_networks"), T("emissions_datacenters")],
-            "Emissions": [
-                intermediate_steps.get("production_co2_total", 0),
-                intermediate_steps.get("network_co2_total", 0),
-                intermediate_steps.get("datacenter_co2_total", 0),
-            ]
-        })
-        st.bar_chart(emissions_data.set_index("Category"), y="Emissions", y_label=T("unit_per_year"))
+
+        # Create custom Altair bar chart with horizontal x-axis labels
+        import altair as alt
+
+        # Define the desired order for categories
+        category_order = [
+            T("emissions_production"),
+            T("emissions_networks"),
+            T("emissions_datacenters"),
+        ]
+
+        emissions_data = pd.DataFrame(
+            {
+                "Category": category_order,
+                "Emissions": [
+                    intermediate_steps.get("production_co2_total", 0),
+                    intermediate_steps.get("network_co2_total", 0),
+                    intermediate_steps.get("datacenter_co2_total", 0),
+                ],
+            }
+        )
+
+        chart = (
+            alt.Chart(emissions_data)
+            .mark_bar()
+            .encode(
+                x=alt.X(
+                    "Category:N",
+                    axis=alt.Axis(labelAngle=0, labelLimit=300, title=None),
+                    sort=category_order,
+                ),  # Horizontal labels, prevent truncation, no axis title
+                y=alt.Y("Emissions:Q", title=T("unit_per_year")),
+                color=alt.value("#4CAF50"),  # Green color to match the app theme
+            )
+            .properties(height=400, width=600)  # Increased height for better display
+        )
+
+        st.altair_chart(chart, use_container_width=True)
 
         # Explanation paragraph
         st.write(localize_decimals_in_text(T("result_explanation")))
