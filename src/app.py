@@ -540,7 +540,7 @@ def render_page(role: str, assumptions: Assumptions) -> None:
         # each cell containing the sentence with the number embedded
         usage_header = f"💨 {kg_emitted_display} {unit_suffix}"
         with_prod_header = f"💨 {kg_emitted_with_production_display} {unit_suffix}"
-        header = f"| {with_prod_header} | {usage_header} |\n| --- | --- |\n"
+        header = f"| {with_prod_header} | {usage_header} |\n| :---: | :---: |\n"
         rows_md = []
         for action in assumptions["co2e_offsetting"].keys():
             usage_sentence = T(f"{action}_display").replace(
@@ -554,6 +554,7 @@ def render_page(role: str, assumptions: Assumptions) -> None:
 
         # Emissions breakdown chart
         st.subheader(T("emissions_breakdown_title"))
+        st.write(T("emissions_breakdown_text"))
 
         # Create custom Altair bar chart with horizontal x-axis labels
         import altair as alt
