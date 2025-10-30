@@ -78,7 +78,9 @@ mobile_network_resolution_percent:
   2160p: 0
 co2e_offsetting:
   # how much CO2e you save for various actions
+  train_vs_plane_per_km: 0.18108 # taking the train instead of a plane saves 0.18 kg CO2e per km on average
   electric_vs_thermic_vehicle: 0.114 # driving an electric vehicle instead of a thermic vehicle saves 0.1 kg CO2e per km on average
   no_meat_meal_vs_chicken_meal: 1.08 # eating a vegeterian meal instead of a meal with chicken saves 1 kg CO2e on average
-
+  no_meat_meal_vs_beef_meal: 6.73 # eating a vegeterian meal instead of a meal with beef saves 6.7 kg CO2e on average
+  tap_water_vs_beer_wine: 1.2 # drinking 1 liter of tap water instead of beer/wine saves 1.2 kg CO2e on average (based on 0.3 per 250mL)
 
