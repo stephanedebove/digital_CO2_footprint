@@ -11,7 +11,8 @@ _LANG = "fr"
 _TEXTS: Dict[str, Dict[str, str]] = {
     "fr": {
         # main page:
-        "page_title": "Calculateur d’impact climatique du visionnage de vidéos en ligne",
+        "page_title": "Calculateur d'impact climatique du visionnage de vidéos en ligne",
+        "flag": "🇫🇷",
         "producer": "Je produis des vidéos",
         "consumer": "Je regarde des vidéos",
         "producer_help": "Combien d’heures de vidéos votre chaîne a-t-elle été visionnée au cours de l’année dernière  (YouTube Studio → Données analytiques → Aperçu, et sélectionner « 365 derniers jours » en haut à droite) ?",
@@ -120,7 +121,7 @@ _TEXTS: Dict[str, Dict[str, str]] = {
               - Centres de données : {datacenter_co2_total:,.2f} kg
         """,
         # sidebar:
-        "language_label": "Langue",
+        "language_label": "Langue/Language",
         "main_assumptions_header": "Hypothèses principales",
         "main_assumptions_edit": "Modifier",
         "secondary_assumptions_header": "Hypothèses secondaires",
@@ -220,6 +221,7 @@ _TEXTS: Dict[str, Dict[str, str]] = {
     },
     "en": {
         "page_title": "Climate impact calculator for online video streaming",
+        "flag": "🇬🇧",
         "producer": "I produce videos",
         "consumer": "I watch videos",
         "producer_help": "How many hours of videos has your channel been watched over the past year (YouTube Studio → Analytics → Overview, and select 'Last 365 days' in the top right)?",
@@ -328,7 +330,7 @@ This gives us emissions of {device_production_co2_per_video_hour_total_plus_ener
         - Data centers: {datacenter_co2_total:,.2f} kg
 """,
         # sidebar:
-        "language_label": "Language",
+        "language_label": "Langue/Language",
         "main_assumptions_header": "Main assumptions",
         "main_assumptions_edit": "Edit",
         "secondary_assumptions_header": "Secondary assumptions",

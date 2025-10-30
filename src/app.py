@@ -429,14 +429,19 @@ def render_language_switch() -> None:
     """Render language switch in sidebar and set current language."""
     if "lang" not in st.session_state:
         st.session_state["lang"] = "en"
-    lang = st.sidebar.selectbox(
+    lang_options = {
+        f"{_TEXTS['fr']['flag']} FR": "fr",
+        f"{_TEXTS['en']['flag']} EN": "en",
+    }
+    selected_display = st.sidebar.selectbox(
         T("language_label"),
-        options=list(
-            _TEXTS.keys()
-        ),  # Dynamically fetch available languages from _TEXTS
-        index=list(_TEXTS.keys()).index(st.session_state["lang"]),
+        options=list(lang_options.keys()),
+        index=list(lang_options.keys()).index(
+            f"{_TEXTS[st.session_state['lang']]['flag']} {st.session_state['lang'].upper()}"
+        ),
         key="language_selectbox",
     )
+    lang = lang_options[selected_display]
     st.session_state["lang"] = lang
     set_language(st.session_state["lang"])
 
