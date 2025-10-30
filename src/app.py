@@ -1,5 +1,6 @@
 from typing import Optional
 
+import pandas as pd
 import streamlit as st
 
 from calculator import calculate_co2e_offsetting, compute_total_kg_co2e
@@ -518,6 +519,18 @@ def render_page(role: str, assumptions: Assumptions) -> None:
             """,
             unsafe_allow_html=True,
         )
+
+        # Emissions breakdown chart
+        st.subheader(T("emissions_breakdown_title"))
+        emissions_data = pd.DataFrame({
+            "Category": [T("emissions_production"), T("emissions_networks"), T("emissions_datacenters")],
+            "Emissions": [
+                intermediate_steps.get("production_co2_total", 0),
+                intermediate_steps.get("network_co2_total", 0),
+                intermediate_steps.get("datacenter_co2_total", 0),
+            ]
+        })
+        st.bar_chart(emissions_data.set_index("Category"), y="Emissions", y_label=T("unit_per_year"))
 
         # Explanation paragraph
         st.write(localize_decimals_in_text(T("result_explanation")))

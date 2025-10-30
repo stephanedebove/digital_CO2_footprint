@@ -212,6 +212,10 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         "offsetting_table_with_production": "qui prennent en compte le CO2 à la production",
         "electric_vs_thermic_vehicle_display": "Conduire {x} kms en voiture électrique plutôt que thermique.",
         "no_meat_meal_vs_chicken_meal_display": "Remplacer {x} repas avec poulet par un repas végétarien.",
+        "emissions_breakdown_title": "Répartition des émissions de CO2e",
+        "emissions_production": "Production des appareils",
+        "emissions_networks": "Réseaux",
+        "emissions_datacenters": "Centres de données",
         "source_text": "Source(s) pour les valeurs par défaut : ",
     },
     "en": {
@@ -414,6 +418,10 @@ This gives us emissions of {device_production_co2_per_video_hour_total_plus_ener
         "offsetting_table_with_production": "that account for production CO2",
         "electric_vs_thermic_vehicle_display": "Drive {x} km in an electric car instead of a thermal car.",
         "no_meat_meal_vs_chicken_meal_display": "Replace {x} chicken meals with vegetarian meals.",
+        "emissions_breakdown_title": "CO2e emissions breakdown",
+        "emissions_production": "Device production",
+        "emissions_networks": "Networks",
+        "emissions_datacenters": "Data centers",
         "source_text": "Source(s) for default values: ",
     },
 }
