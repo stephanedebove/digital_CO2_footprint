@@ -650,7 +650,7 @@ def main() -> None:
     assumptions = render_sidebar(defaults)
 
     # Center segmented control using columns, no label
-    seg_options = ["producer", "consumer"]
+    seg_options = ["consumer", "producer"]
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         selected = st.segmented_control(
