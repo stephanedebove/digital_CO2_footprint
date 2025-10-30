@@ -462,39 +462,43 @@ def get_decimal_separator() -> str:
 
 
 def format_float(value: float, decimals: int = 2) -> str:
-    """Format a float using the current language's decimal separator.
+    """Format a float using the current language's decimal and thousands separators.
 
     Args:
       value: Numeric value to format.
       decimals: Number of digits after the decimal separator.
 
     Returns:
-      The formatted string, with a comma as decimal in French and dot otherwise.
+      The formatted string, with space as thousands separator and comma as decimal in French,
+      comma as thousands separator and dot as decimal in English.
     """
     try:
-        # Always format using Python standard then localize the decimal separator.
-        s = f"{value:.{decimals}f}"
+        # Format with comma as thousands separator and dot as decimal
+        s = f"{value:,.{decimals}f}"
     except Exception:
         # Fallback: attempt string conversion
         s = str(value)
     if _LANG == "fr":
-        return s.replace(".", ",")
+        # Replace comma (thousands) with space, dot (decimal) with comma
+        return s.replace(",", " ").replace(".", ",")
     return s
 
 
 def localize_decimals_in_text(text: str) -> str:
-    """Replace only decimal points between digits by commas for French.
+    """Replace decimal points and thousands commas for French localization.
 
-    This avoids touching dots in URLs or regular punctuation by only targeting
-    patterns like 123.45 where a dot is between two digits.
+    For French, converts numbers like 1,234.56 to 1 234,56.
 
     Args:
       text: Arbitrary text possibly containing numbers.
 
     Returns:
-      Text with localized decimal separators if language is French, unchanged otherwise.
+      Text with localized number formats if language is French, unchanged otherwise.
     """
     if _LANG != "fr" or not text:
         return text
-    # Replace digit . digit with digit , digit
-    return re.sub(r"(?<=\d)\.(?=\d)", ",", text)
+    # Handle numbers with thousands commas and decimal dot: 1,234.56 -> 1 234,56
+    text = re.sub(r'(\d{1,3}(?:,\d{3})*\.\d+)', lambda m: m.group().replace(',', ' ').replace('.', ','), text)
+    # Handle simple decimal dots without thousands: 123.45 -> 123,45
+    text = re.sub(r'(?<=\d)\.(?=\d)', ',', text)
+    return text
