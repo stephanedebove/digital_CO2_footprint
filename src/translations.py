@@ -13,8 +13,8 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         # main page:
         "page_title": "🎥 Calculateur d'impact climatique du visionnage de vidéos en ligne",
         "flag": "🇫🇷",
-        "producer": "🎬 Je produis des vidéos",
-        "consumer": "📺 Je regarde des vidéos",
+        "producer": "Je produis des vidéos",
+        "consumer": "Je regarde des vidéos",
         "producer_help": "Combien d’heures de vidéos votre chaîne a-t-elle été visionnée au cours de l’année dernière  (YouTube Studio → Données analytiques → Aperçu, et sélectionner « 365 derniers jours » en haut à droite) ?",
         "consumer_help": "Combien d’heures de vidéos regardez-vous par semaine ? (oui, même les plus inavouables...)",
         "consumer_weekly_hours": "Heures / semaine ",
@@ -223,8 +223,8 @@ _TEXTS: Dict[str, Dict[str, str]] = {
     "en": {
         "page_title": "🎥 Climate impact calculator for online video streaming",
         "flag": "🇬🇧",
-        "producer": "🎬 I produce videos",
-        "consumer": "📺 I watch videos",
+        "producer": "I produce videos",
+        "consumer": "I watch videos",
         "producer_help": "How many hours of videos has your channel been watched over the past year (YouTube Studio → Analytics → Overview, and select 'Last 365 days' in the top right)?",
         "consumer_help": "How many hours of videos do you watch per week? (yes, even the most embarrassing ones...)",
         "consumer_weekly_hours": "Hours / week",
