@@ -540,7 +540,7 @@ def render_page(role: str, assumptions: Assumptions) -> None:
         # each cell containing the sentence with the number embedded
         usage_header = f"💨 {kg_emitted_display} {unit_suffix}"
         with_prod_header = f"💨 {kg_emitted_with_production_display} {unit_suffix}"
-        header = f"| {usage_header} | {with_prod_header} |\n| --- | --- |\n"
+        header = f"| {with_prod_header} | {usage_header} |\n| --- | --- |\n"
         rows_md = []
         for action in assumptions["co2e_offsetting"].keys():
             usage_sentence = T(f"{action}_display").replace(
@@ -549,7 +549,7 @@ def render_page(role: str, assumptions: Assumptions) -> None:
             with_prod_sentence = T(f"{action}_display").replace(
                 "{x}", format_float(offsetting_with_prod.get(action, 0.0), 2)
             )
-            rows_md.append(f"| {usage_sentence} | {with_prod_sentence} |")
+            rows_md.append(f"| {with_prod_sentence} | {usage_sentence} |")
         st.markdown(localize_decimals_in_text(header + "\n".join(rows_md)))
 
         # Emissions breakdown chart
