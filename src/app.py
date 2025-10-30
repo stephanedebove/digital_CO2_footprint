@@ -528,6 +528,30 @@ def render_page(role: str, assumptions: Assumptions) -> None:
             unsafe_allow_html=True,
         )
 
+        st.subheader(T("co2e_offsetting_title"))
+        # Compute offsetting for both usage-only and with-production totals
+        offsetting_usage = calculate_co2e_offsetting(
+            kg_emitted, assumptions["co2e_offsetting"]
+        )
+        offsetting_with_prod = calculate_co2e_offsetting(
+            kg_emitted_with_production, assumptions["co2e_offsetting"]
+        )
+        # Build a Markdown table with two columns (no index, no "Action" header),
+        # each cell containing the sentence with the number embedded
+        usage_header = f"💨 {kg_emitted_display} {unit_suffix}"
+        with_prod_header = f"💨 {kg_emitted_with_production_display} {unit_suffix}"
+        header = f"| {usage_header} | {with_prod_header} |\n| --- | --- |\n"
+        rows_md = []
+        for action in assumptions["co2e_offsetting"].keys():
+            usage_sentence = T(f"{action}_display").replace(
+                "{x}", format_float(offsetting_usage.get(action, 0.0), 2)
+            )
+            with_prod_sentence = T(f"{action}_display").replace(
+                "{x}", format_float(offsetting_with_prod.get(action, 0.0), 2)
+            )
+            rows_md.append(f"| {usage_sentence} | {with_prod_sentence} |")
+        st.markdown(localize_decimals_in_text(header + "\n".join(rows_md)))
+
         # Emissions breakdown chart
         st.subheader(T("emissions_breakdown_title"))
 
@@ -571,30 +595,6 @@ def render_page(role: str, assumptions: Assumptions) -> None:
 
         # Explanation paragraph
         st.write(localize_decimals_in_text(T("result_explanation")))
-
-        st.subheader(T("co2e_offsetting_title"))
-        # Compute offsetting for both usage-only and with-production totals
-        offsetting_usage = calculate_co2e_offsetting(
-            kg_emitted, assumptions["co2e_offsetting"]
-        )
-        offsetting_with_prod = calculate_co2e_offsetting(
-            kg_emitted_with_production, assumptions["co2e_offsetting"]
-        )
-        # Build a Markdown table with two columns (no index, no "Action" header),
-        # each cell containing the sentence with the number embedded
-        usage_col = T("offsetting_table_usage_only")
-        with_prod_col = T("offsetting_table_with_production")
-        header = f"| {usage_col} | {with_prod_col} |\n| --- | --- |\n"
-        rows_md = []
-        for action in assumptions["co2e_offsetting"].keys():
-            usage_sentence = T(f"{action}_display").replace(
-                "{x}", format_float(offsetting_usage.get(action, 0.0), 2)
-            )
-            with_prod_sentence = T(f"{action}_display").replace(
-                "{x}", format_float(offsetting_with_prod.get(action, 0.0), 2)
-            )
-            rows_md.append(f"| {usage_sentence} | {with_prod_sentence} |")
-        st.markdown(localize_decimals_in_text(header + "\n".join(rows_md)))
 
         assumptions_flattened = flatten_assumptions(assumptions.__dict__)
         st.subheader(T("details_subheader"))
