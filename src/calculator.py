@@ -110,7 +110,9 @@ def compute_total_kg_co2e(
     device_production_co2_per_video_hour_by_device: Dict[str, float] = {}
     for device in device_keys:
         production_kg = assumptions["device_production_kg_co2e"].get(device, 0.0)
-        lifetime_hours = max(1.0, assumptions["device_lifetime_hours"].get(device, 1.0))
+        lifetime_years = assumptions["device_lifetime_years"].get(device, 1.0)
+        usage_hours_per_day = assumptions["device_usage_hours_per_day"].get(device, 1.0)
+        lifetime_hours = max(1.0, lifetime_years * 365 * usage_hours_per_day)
         production_per_device_hour = production_kg / lifetime_hours
         # New logic: consider production amortized per hour of device usage for video (video_share removed)
         device_production_co2_per_video_hour_by_device[device] = (
@@ -119,6 +121,9 @@ def compute_total_kg_co2e(
         intermediate_values[
             f"device_production_co2_per_video_hour_by_device_{device}"
         ] = device_production_co2_per_video_hour_by_device[device]
+        intermediate_values[f"device_lifetime_years_{device}"] = lifetime_years
+        intermediate_values[f"device_usage_hours_per_day_{device}"] = usage_hours_per_day
+        intermediate_values[f"device_lifetime_hours_{device}"] = lifetime_hours
     device_production_co2_per_video_hour_total = sum(
         device_production_co2_per_video_hour_by_device.values()
     )

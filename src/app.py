@@ -379,6 +379,8 @@ def render_assumptions_section(
 def render_sidebar(assumptions: Assumptions) -> Assumptions:
     # dictionary of variables to render in the sidebar as main assumptions. Default streamlit widget will be st.slider, min value 0, max value 100, except if you override it here:
     main_assumptions = {
+        "device_lifetime_years": {"streamlit_widget": st.number_input},
+        "device_usage_hours_per_day": {"streamlit_widget": st.number_input},
         "device_percent": {
             "sum_should_be": 100.0,
             "variable_to_alter": "tv",
@@ -398,7 +400,6 @@ def render_sidebar(assumptions: Assumptions) -> Assumptions:
 
     secondary_assumptions = {
         "device_production_kg_co2e": {},
-        "device_lifetime_hours": {},
         "device_watts": {},
         "co2e_per_kWh": {},
         "network_kwh_per_gb": {},

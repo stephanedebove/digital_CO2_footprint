@@ -63,10 +63,10 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         
                a. CO2e lié à la production de chaque appareil, ramené à une heure d’utilisation = (CO2e émis à la production / durée de vie de l’appareil en heures). Soit :
         
-                  - Ordinateur: ({device_production_kg_co2e_computer:.2f} / {device_lifetime_hours_computer:.0f}) × {device_percent_computer:.1f}% = {device_production_co2_per_video_hour_by_device_computer:.6f} kg/h
-                  - Smartphone: ({device_production_kg_co2e_smartphone:.2f} / {device_lifetime_hours_smartphone:.0f}) × {device_percent_smartphone:.1f}% = {device_production_co2_per_video_hour_by_device_smartphone:.6f} kg/h
-                  - Tablette: ({device_production_kg_co2e_tablet:.2f} / {device_lifetime_hours_tablet:.0f}) × {device_percent_tablet:.1f}% = {device_production_co2_per_video_hour_by_device_tablet:.6f} kg/h
-                  - TV: ({device_production_kg_co2e_tv:.2f} / {device_lifetime_hours_tv:.0f}) × {device_percent_tv:.1f}% = {device_production_co2_per_video_hour_by_device_tv:.6f} kg/h
+                  - Ordinateur: ({device_production_kg_co2e_computer:.2f} / ({device_lifetime_years_computer:.1f} * 365 * {device_usage_hours_per_day_computer:.2f})) × {device_percent_computer:.1f}% = {device_production_co2_per_video_hour_by_device_computer:.6f} kg/h
+                  - Smartphone: ({device_production_kg_co2e_smartphone:.2f} / ({device_lifetime_years_smartphone:.1f} * 365 * {device_usage_hours_per_day_smartphone:.2f})) × {device_percent_smartphone:.1f}% = {device_production_co2_per_video_hour_by_device_smartphone:.6f} kg/h
+                  - Tablette: ({device_production_kg_co2e_tablet:.2f} / ({device_lifetime_years_tablet:.1f} * 365 * {device_usage_hours_per_day_tablet:.2f})) × {device_percent_tablet:.1f}% = {device_production_co2_per_video_hour_by_device_tablet:.6f} kg/h
+                  - TV: ({device_production_kg_co2e_tv:.2f} / ({device_lifetime_years_tv:.1f} * 365 * {device_usage_hours_per_day_tv:.2f})) × {device_percent_tv:.1f}% = {device_production_co2_per_video_hour_by_device_tv:.6f} kg/h
         
                   **Total pour la production des appareils = {device_production_co2_per_video_hour_total:.6f} kg CO2e / h.**
         
@@ -152,12 +152,18 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         "device_production_kg_co2e_smartphone": "Smartphone",
         "device_production_kg_co2e_tablet": "Tablette",
         "device_production_kg_co2e_tv": "TV",
-        "device_lifetime_hours": "Durée de vie moyenne de chaque appareil (en heures d’utilisation)",
-        "device_lifetime_hours_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. P73 à P78 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=73",
-        "device_lifetime_hours_computer": "Ordinateur*",
-        "device_lifetime_hours_smartphone": "Smartphone",
-        "device_lifetime_hours_tablet": "Tablette",
-        "device_lifetime_hours_tv": "TV",
+        "device_lifetime_years": "Combien d’années gardez-vous généralement vos appareils ?",
+        "device_lifetime_years_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. P73 à P78 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=73",
+        "device_lifetime_years_computer": "Ordinateur*",
+        "device_lifetime_years_smartphone": "Smartphone",
+        "device_lifetime_years_tablet": "Tablette",
+        "device_lifetime_years_tv": "TV",
+        "device_usage_hours_per_day": "Combien d’heures par jour utilisez-vous chaque type d’appareil ?",
+        "device_usage_hours_per_day_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. P73 à P78 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=73",
+        "device_usage_hours_per_day_computer": "Ordinateur*",
+        "device_usage_hours_per_day_smartphone": "Smartphone",
+        "device_usage_hours_per_day_tablet": "Tablette",
+        "device_usage_hours_per_day_tv": "TV",
         "device_watts": "Consommation électrique moyenne des appareils lorsqu’ils sont utilisés pour regarder des vidéos (en Wh/h)",
         "device_watts_source": "Arcom, 2024. Étude de l'impact environnemental des usages audiovisuels en france. P73 à P78 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=73",
         "device_watts_computer": "Ordinateur*",
@@ -278,10 +284,10 @@ _TEXTS: Dict[str, Dict[str, str]] = {
 
         a. CO2e from the production of each device, allocated per hour of usage = (CO2e emitted during production / device lifespan in hours). For example:
 
-            - Computer: ({device_production_kg_co2e_computer:.2f} / {device_lifetime_hours_computer:.0f}) × {device_percent_computer:.1f}% = {device_production_co2_per_video_hour_by_device_computer:.6f} kg/h
-            - Smartphone: ({device_production_kg_co2e_smartphone:.2f} / {device_lifetime_hours_smartphone:.0f}) × {device_percent_smartphone:.1f}% = {device_production_co2_per_video_hour_by_device_smartphone:.6f} kg/h
-            - Tablet: ({device_production_kg_co2e_tablet:.2f} / {device_lifetime_hours_tablet:.0f}) × {device_percent_tablet:.1f}% = {device_production_co2_per_video_hour_by_device_tablet:.6f} kg/h
-            - TV: ({device_production_kg_co2e_tv:.2f} / {device_lifetime_hours_tv:.0f}) × {device_percent_tv:.1f}% = {device_production_co2_per_video_hour_by_device_tv:.6f} kg/h
+            - Computer: ({device_production_kg_co2e_computer:.2f} / ({device_lifetime_years_computer:.1f} * 365 * {device_usage_hours_per_day_computer:.2f})) × {device_percent_computer:.1f}% = {device_production_co2_per_video_hour_by_device_computer:.6f} kg/h
+            - Smartphone: ({device_production_kg_co2e_smartphone:.2f} / ({device_lifetime_years_smartphone:.1f} * 365 * {device_usage_hours_per_day_smartphone:.2f})) × {device_percent_smartphone:.1f}% = {device_production_co2_per_video_hour_by_device_smartphone:.6f} kg/h
+            - Tablet: ({device_production_kg_co2e_tablet:.2f} / ({device_lifetime_years_tablet:.1f} * 365 * {device_usage_hours_per_day_tablet:.2f})) × {device_percent_tablet:.1f}% = {device_production_co2_per_video_hour_by_device_tablet:.6f} kg/h
+            - TV: ({device_production_kg_co2e_tv:.2f} / ({device_lifetime_years_tv:.1f} * 365 * {device_usage_hours_per_day_tv:.2f})) × {device_percent_tv:.1f}% = {device_production_co2_per_video_hour_by_device_tv:.6f} kg/h
 
             **Total for device production = {device_production_co2_per_video_hour_total:.6f} kg CO2e/h.**
 
@@ -373,6 +379,18 @@ This gives us emissions of {device_production_co2_per_video_hour_total_plus_ener
         "device_lifetime_hours_smartphone": "Smartphone",
         "device_lifetime_hours_tablet": "Tablet",
         "device_lifetime_hours_tv": "TV",
+        "device_lifetime_years": "How many years do you generally keep a device?",
+        "device_lifetime_years_source": "Arcom, 2024. Study on the environmental impact of audiovisual usage in France. Pages 73 to 78 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=73",
+        "device_lifetime_years_computer": "Computer*",
+        "device_lifetime_years_smartphone": "Smartphone",
+        "device_lifetime_years_tablet": "Tablet",
+        "device_lifetime_years_tv": "TV",
+        "device_usage_hours_per_day": "How many hours do you use each type of device each day?",
+        "device_usage_hours_per_day_source": "Arcom, 2024. Study on the environmental impact of audiovisual usage in France. Pages 73 to 78 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=73",
+        "device_usage_hours_per_day_computer": "Computer*",
+        "device_usage_hours_per_day_smartphone": "Smartphone",
+        "device_usage_hours_per_day_tablet": "Tablet",
+        "device_usage_hours_per_day_tv": "TV",
         "device_watts": "Average power consumption of devices when used to watch videos (in Wh/h)",
         "device_watts_source": "Arcom, 2024. Study on the environmental impact of audiovisual usage in France. Pages 73 to 78 https://www.arcom.fr/sites/default/files/2024-10/Arcom-arcep-ademe-etude-impact-environnemental-des-usages-audiovisuels.pdf#page=73",
         "device_watts_computer": "Computer*",

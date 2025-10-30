@@ -19,12 +19,18 @@ device_production_kg_co2e:
   smartphone: 84 
   tablet: 75.9 
   tv: 360
-device_lifetime_hours:
-  # Average lifetime of each device type in hours
-  computer: 4416.5 # laptops especially, not much data for desktop computers
-  smartphone: 3558.75
-  tablet: 821.25
-  tv: 11680.00
+device_lifetime_years:
+  # Average lifetime of each device type in years
+  computer: 5
+  smartphone: 2.5
+  tablet: 3
+  tv: 8
+device_usage_hours_per_day:
+  # Average daily usage hours for each device type
+  computer: 2.42
+  smartphone: 3.9
+  tablet: 0.75
+  tv: 4
 device_watts:
   # Average power consumption (in watts) for each device type during use.
   computer: 9.54 # laptops especially, not much data for desktop computers
