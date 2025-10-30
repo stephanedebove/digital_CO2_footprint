@@ -481,9 +481,11 @@ def render_page(role: str, assumptions: Assumptions) -> None:
         return "hours_input_key"
 
     # Initialize with YAML default to keep a single source of truth
+    max_hours = 168 if role == "consumer" else None
     assumptions.hours_input = st.number_input(
         hours_label,
         min_value=0,
+        max_value=max_hours,
         value=int(getattr(assumptions, "hours_input", 30)),
         step=1,
         format="%d",
@@ -536,12 +538,11 @@ def render_page(role: str, assumptions: Assumptions) -> None:
         offsetting_with_prod = calculate_co2e_offsetting(
             kg_emitted_with_production, assumptions["co2e_offsetting"]
         )
-        # Build a Markdown table with two columns (no index, no "Action" header),
+        # Build an HTML table with two columns (no index, no "Action" header),
         # each cell containing the sentence with the number embedded
         usage_header = f"💨 {kg_emitted_display} {unit_suffix}"
         with_prod_header = f"💨 {kg_emitted_with_production_display} {unit_suffix}"
-        header = f"| {with_prod_header} | {usage_header} |\n| :---: | :---: |\n"
-        rows_md = []
+        table_html = f'<table style="width: 100%; border-collapse: collapse;"><tr><th style="text-align: center; border: 1px solid #ddd; padding: 8px;">{with_prod_header}</th><th style="text-align: center; border: 1px solid #ddd; padding: 8px;">{usage_header}</th></tr>'
         for action in assumptions["co2e_offsetting"].keys():
             usage_sentence = T(f"{action}_display").replace(
                 "{x}", format_float(offsetting_usage.get(action, 0.0), 2)
@@ -549,8 +550,9 @@ def render_page(role: str, assumptions: Assumptions) -> None:
             with_prod_sentence = T(f"{action}_display").replace(
                 "{x}", format_float(offsetting_with_prod.get(action, 0.0), 2)
             )
-            rows_md.append(f"| {with_prod_sentence} | {usage_sentence} |")
-        st.markdown(localize_decimals_in_text(header + "\n".join(rows_md)))
+            table_html += f'<tr><td style="border: 1px solid #ddd; padding: 8px;">{with_prod_sentence}</td><td style="border: 1px solid #ddd; padding: 8px;">{usage_sentence}</td></tr>'
+        table_html += "</table>"
+        st.markdown(table_html, unsafe_allow_html=True)
 
         # Emissions breakdown chart
         st.subheader(T("emissions_breakdown_title"))
