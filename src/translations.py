@@ -20,13 +20,13 @@ _TEXTS: Dict[str, Dict[str, str]] = {
         "consumer_weekly_hours": "Heures / semaine ",
         "producer_watch_hours": "(en heures par an)",
         "compute_button": "Calculer",
-        "sidebar_draw_attention": "(NB : le calculateur utilise un certain nombre de valeurs par défaut mais vous pourrez toutes les changer dans la barre latérale)",
+        "sidebar_draw_attention": "(NB : toutes les valeurs par défaut utilisées par le calculateur sont changeables dans la barre latérale)",
         "result_total_kg": "Émissions",
         "result_total_kg_year": "Émissions",
         "unit_per_year": "kg de CO2e par an",
         "result_with_production_prefix": "En prenant en compte le CO2e émis pour produire les appareils servant à regarder les vidéos (smartphone, ordinateur, tablette, TV...), cela correspond à :",
         "result_without_production_prefix": "\nSans prendre en compte le CO2e émis pour produire les appareils, cela correspond à :",
-        "emissions_breakdown_title": "Pourquoi on vous embrouille avec deux chiffres différents ?",
+        "emissions_breakdown_title": "Pourquoi on vous embrouille avec deux chiffres ?",
         "emissions_breakdown_text": "Parce que la majorité du CO2e émis l’est à la fabrication des appareils servant à regarder les vidéos (smartphone, ordinateur, tablette, TV...). La preuve sur ce graphe, dans votre cas précis :",
         "emissions_production": "🏭 Production des appareils",
         "emissions_networks": "🌐 Réseaux",
@@ -498,7 +498,11 @@ def localize_decimals_in_text(text: str) -> str:
     if _LANG != "fr" or not text:
         return text
     # Handle numbers with thousands commas and decimal dot: 1,234.56 -> 1 234,56
-    text = re.sub(r'(\d{1,3}(?:,\d{3})*\.\d+)', lambda m: m.group().replace(',', ' ').replace('.', ','), text)
+    text = re.sub(
+        r"(\d{1,3}(?:,\d{3})*\.\d+)",
+        lambda m: m.group().replace(",", " ").replace(".", ","),
+        text,
+    )
     # Handle simple decimal dots without thousands: 123.45 -> 123,45
-    text = re.sub(r'(?<=\d)\.(?=\d)', ',', text)
+    text = re.sub(r"(?<=\d)\.(?=\d)", ",", text)
     return text
