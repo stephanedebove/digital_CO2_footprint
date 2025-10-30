@@ -503,11 +503,11 @@ def render_page(role: str, assumptions: Assumptions) -> None:
         st.write(T("result_with_production_prefix"))
         st.markdown(
             f"""
-            <div style=\"display: flex; justify-content: center; margin-top: 8px;\">
-                <button style=\"background-color: #4CAF50; color: white; border: none; padding: 10px 20px; 
+            <div style="display: flex; justify-content: center; margin-top: 8px;">
+                <button style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; 
                                text-align: center; text-decoration: none; display: inline-block; 
-                               font-size: 30px; border-radius: 5px; cursor: default; margin-bottom: 10px;\">
-                     {kg_emitted_with_production_display} {unit_suffix}
+                               font-size: 30px; border-radius: 5px; cursor: default; margin-bottom: 10px;">
+                     💨 {kg_emitted_with_production_display} {unit_suffix}
                 </button>
             </div>
             """,
@@ -521,7 +521,7 @@ def render_page(role: str, assumptions: Assumptions) -> None:
                 <button style=\"background-color: #4CAF50; color: white; border: none; padding: 10px 20px; 
                                text-align: center; text-decoration: none; display: inline-block; 
                                font-size: 30px; border-radius: 5px; cursor: default; margin-bottom: 20px;">
-                     {kg_emitted_display} {unit_suffix}
+                     💨 {kg_emitted_display} {unit_suffix}
                 </button>
             </div>
             """,
