@@ -490,6 +490,8 @@ def render_page(role: str, assumptions: Assumptions) -> None:
         key=_hours_key(),
     )
 
+    st.markdown(f"<small>{T('sidebar_draw_attention')}</small>", unsafe_allow_html=True)
+
     if render_compute_button(T("compute_button")):
         kg_emitted, kg_emitted_with_production, intermediate_steps = (
             compute_total_kg_co2e(assumptions, role=role)
