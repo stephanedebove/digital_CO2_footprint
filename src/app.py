@@ -569,6 +569,23 @@ def render_page(role: str, assumptions: Assumptions) -> None:
 def main() -> None:
     st.set_page_config(page_title="Digital CO2 Footprint", layout="centered")
 
+    # Custom CSS to set sidebar width to 25%
+    st.markdown(
+        """
+        <style>
+        [data-testid="stSidebar"] {
+            width: 25% !important;
+            min-width: 25% !important;
+            max-width: 25% !important;
+        }
+        [data-testid="stSidebarCollapsedControl"] {
+            display: none;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     # Force French as default language before any translation
     if "lang" not in st.session_state:
         st.session_state["lang"] = "fr"
