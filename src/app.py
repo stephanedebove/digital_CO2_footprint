@@ -237,8 +237,14 @@ def render_assumptions_section(
         render_source(variable)
         if isinstance(getattr(assumptions, variable), dict):
             # if the variable has subitems (is a dict), render each subitem with its own widget
-            total = 0.0
+            variable_to_alter = metadata.get("variable_to_alter")
+            modifiable_total = 0.0
+
+            # First pass: render widgets for modifiable variables and calculate their total
             for subitem, value in getattr(assumptions, variable).items():
+                if subitem == variable_to_alter:
+                    continue  # Skip the variable_to_alter for now
+
                 # code to display the streamlit widget for each subitem:
                 # getattr() part is the widget instance, e.g. st.slider(...),
                 # followed by widget parameters in ()
@@ -266,20 +272,70 @@ def render_assumptions_section(
                         format=(f"%0.{decs}f" if decs > 0 else "%d"),
                         key=f"{variable}_{subitem}_slider",
                     )
-                total += getattr(assumptions, variable)[subitem]
-            if metadata.get("sum_should_be", None) is not None:
-                # check if sum of subitems equals sum_should_be, if not, adjust the "variable_to_alter" subitem to make it so
-                if not "variable_to_alter" in metadata:
-                    raise ValueError(
-                        f"Assumptions variable '{variable}' has 'sum_should_be' but no 'variable_to_alter' specified."
-                    )
-                if total < metadata["sum_should_be"]:
-                    getattr(assumptions, variable)[metadata["variable_to_alter"]] += (
-                        metadata["sum_should_be"] - total
-                    )
+                modifiable_total += getattr(assumptions, variable)[subitem]
+
+            # Handle the variable_to_alter: calculate and display as read-only
+            if variable_to_alter and metadata.get("sum_should_be", None) is not None:
+                # Calculate the value for variable_to_alter to make the sum equal to sum_should_be
+                target_value = metadata["sum_should_be"] - modifiable_total
+                target_value = max(0.0, target_value)  # Ensure non-negative
+                getattr(assumptions, variable)[variable_to_alter] = target_value
+
+                # Display as read-only with a disabled appearance
+                decs = assumptions.get_decimals(variable, variable_to_alter)
+                display_value = format_float(target_value, decs)
+                help_text = (
+                    "Cette valeur est calculée automatiquement pour que la somme soit 100%"
+                    if _LANG == "fr"
+                    else "This value is calculated automatically so that the sum equals 100%"
+                )
+                st.text_input(
+                    label=T(f"{variable}_{variable_to_alter}"),
+                    value=display_value,
+                    key=f"{variable}_{variable_to_alter}_readonly",
+                    disabled=True,
+                    help=help_text,
+                )
+
+                # Check for errors (if modifiable total exceeds the target)
+                if modifiable_total > metadata["sum_should_be"]:
+                    st.error(T(f"{variable}_error").format(percent=modifiable_total))
+                else:
                     st.info(T(f"{variable}_check"))
-                elif total > metadata["sum_should_be"]:
-                    st.error(T(f"{variable}_error").format(percent=total))
+            else:
+                # Fallback: render normally if no variable_to_alter or sum_should_be
+                if variable_to_alter:
+                    value = getattr(assumptions, variable)[variable_to_alter]
+                    widget = metadata.get("streamlit_widget", default_streamlit_widget)
+                    if widget == st.number_input:
+                        decs = assumptions.get_decimals(variable, variable_to_alter)
+                        getattr(assumptions, variable)[variable_to_alter] = (
+                            number_input_localized(
+                                label=T(f"{variable}_{variable_to_alter}"),
+                                min_value=safe_float(
+                                    metadata.get("min_value", min_value)
+                                ),
+                                max_value=safe_float(
+                                    metadata.get("max_value", max_value)
+                                ),
+                                value=float(value),
+                                key=f"{variable}_{variable_to_alter}_input_fallback",
+                                decimals=decs,
+                            )
+                        )
+                    else:
+                        # Slider: step and display format based on YAML decimals
+                        decs = assumptions.get_decimals(variable, variable_to_alter)
+                        step_val = 10 ** (-decs) if decs > 0 else 1.0
+                        getattr(assumptions, variable)[variable_to_alter] = widget(
+                            label=T(f"{variable}_{variable_to_alter}"),
+                            min_value=safe_float(metadata.get("min_value", min_value)),
+                            max_value=safe_float(metadata.get("max_value", max_value)),
+                            value=float(value),
+                            step=step_val,
+                            format=(f"%0.{decs}f" if decs > 0 else "%d"),
+                            key=f"{variable}_{variable_to_alter}_slider_fallback",
+                        )
         else:
             # if the variable is a single value, render it with a single widget
             widget = metadata.get("streamlit_widget", default_streamlit_widget)
@@ -323,17 +379,17 @@ def render_sidebar(assumptions: Assumptions) -> Assumptions:
     main_assumptions = {
         "device_percent": {
             "sum_should_be": 100.0,
-            "variable_to_alter": "computer",
+            "variable_to_alter": "tv",
         },
         "fixed_network_percent": {},
         # New per-network resolution percents (each group sums to 100)
         "fixed_network_resolution_percent": {
             "sum_should_be": 100.0,
-            "variable_to_alter": "1080p",
+            "variable_to_alter": "2160p",
         },
         "mobile_network_resolution_percent": {
             "sum_should_be": 100.0,
-            "variable_to_alter": "1080p",
+            "variable_to_alter": "2160p",
         },
     }
     # dictionary of variables to render in the sidebar as main assumptions. Default streamlit widget will be st.number_input, min value 0, max_value None, except if you override it here:
