@@ -62,15 +62,14 @@ video_bitrate_GB_per_hour:
 # This is used as the initial value in the UI and as a fallback if not overridden.
 hours_input: 30
 
-# New: percent of time spent on fixed network per device (0 = always mobile, 100 = always fixed)
 fixed_network_percent:
-  # Source: Arcom, P110
+# percent of time spent on fixed network per device (0 = always mobile, 100 = always fixed)
+# Source: Arcom, P110
   computer: 100
   smartphone: 50
   tablet: 100
   tv: 100
 
-# New: per-network resolution percents (each group should sum to 100)
 fixed_network_resolution_percent:
   # Source: estimated from Arcom, table 45
   480p: 0
