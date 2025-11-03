@@ -589,6 +589,10 @@ def render_page(role: str, assumptions: Assumptions) -> None:
                 ),  # Horizontal labels, prevent truncation, no axis title
                 y=alt.Y("Emissions:Q", title=T("unit_per_year")),
                 color=alt.value("#4CAF50"),  # Green color to match the app theme
+                tooltip=[
+                    alt.Tooltip("Category:N", title=T("category_axis_title")),
+                    alt.Tooltip("Emissions:Q", title=T("unit_per_year")),
+                ],
             )
             .properties(height=400, width=600)  # Increased height for better display
         )
@@ -688,6 +692,10 @@ def render_page(role: str, assumptions: Assumptions) -> None:
                 ),
                 y=alt.Y("Emissions:Q", title=T("unit_per_year")),
                 color=alt.value("#4CAF50"),
+                tooltip=[
+                    alt.Tooltip("Behavior:N", title=T("behavior_axis_title")),
+                    alt.Tooltip("Emissions:Q", title=T("unit_per_year")),
+                ],
             )
             .properties(height=400, width=800)
         )
