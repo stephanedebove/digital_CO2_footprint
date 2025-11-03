@@ -284,7 +284,7 @@ def render_assumptions_section(
                 target_value = max(0.0, target_value)  # Ensure non-negative
                 getattr(assumptions, variable)[variable_to_alter] = target_value
 
-                # Display as read-only metric
+                # Display as read-only with label above value
                 decs = assumptions.get_decimals(variable, variable_to_alter)
                 display_value = format_float(target_value, decs)
                 help_text = (
@@ -292,9 +292,9 @@ def render_assumptions_section(
                     if _LANG == "fr"
                     else "This value is calculated automatically so that the sum equals 100%"
                 )
-                st.metric(
-                    label=T(f"{variable}_{variable_to_alter}"),
-                    value=display_value,
+                st.markdown(
+                    f"<b>{T(f'{variable}_{variable_to_alter}')}</b><br>{display_value}",
+                    unsafe_allow_html=True,
                     help=help_text,
                 )
 
