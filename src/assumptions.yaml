@@ -81,6 +81,7 @@ mobile_network_resolution_percent:
   480p: 100
   1080p: 0
   2160p: 0
+
 co2e_offsetting:
   # how much CO2e you save for various actions
   train_vs_plane_per_km: 0.18108 # taking the train instead of a plane saves 0.18 kg CO2e per km on average
