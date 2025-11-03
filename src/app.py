@@ -560,9 +560,6 @@ def render_page(role: str, assumptions: Assumptions) -> None:
         st.subheader(T("emissions_breakdown_title"))
         st.write(T("emissions_breakdown_text"))
 
-        # Create custom Altair bar chart with horizontal x-axis labels
-        import altair as alt
-
         # Define the desired order for categories
         category_order = [
             T("emissions_production"),
@@ -611,15 +608,28 @@ def render_page(role: str, assumptions: Assumptions) -> None:
         }
         _, kg_alt1, _ = compute_total_kg_co2e(alt_assumptions1, role=role)
 
-        # Scenario 2: Only Wi-Fi
+        # Scenario 2: Only Wi-Fi, only 1080p
         alt_assumptions2 = copy.deepcopy(assumptions)
         alt_assumptions2.fixed_network_percent = {
             k: 100.0 for k in assumptions.fixed_network_percent
         }
+        alt_assumptions2.fixed_network_resolution_percent = {
+            "480p": 0.0,
+            "1080p": 100.0,
+            "2160p": 0.0,
+        }
+        alt_assumptions2.mobile_network_resolution_percent = {
+            "480p": 0.0,
+            "1080p": 100.0,
+            "2160p": 0.0,
+        }
         _, kg_alt2, _ = compute_total_kg_co2e(alt_assumptions2, role=role)
 
-        # Scenario 3: Only 480p
+        # Scenario 3: Only Wi-Fi, only 480p
         alt_assumptions3 = copy.deepcopy(assumptions)
+        alt_assumptions3.fixed_network_percent = {
+            k: 100.0 for k in assumptions.fixed_network_percent
+        }
         alt_assumptions3.fixed_network_resolution_percent = {
             "480p": 100.0,
             "1080p": 0.0,
@@ -632,20 +642,38 @@ def render_page(role: str, assumptions: Assumptions) -> None:
         }
         _, kg_alt3, _ = compute_total_kg_co2e(alt_assumptions3, role=role)
 
+        # Scenario 4: Only mobile, only 480p
+        alt_assumptions4 = copy.deepcopy(assumptions)
+        alt_assumptions4.fixed_network_percent = {
+            k: 0.0 for k in assumptions.fixed_network_percent
+        }
+        alt_assumptions4.fixed_network_resolution_percent = {
+            "480p": 100.0,
+            "1080p": 0.0,
+            "2160p": 0.0,
+        }
+        alt_assumptions4.mobile_network_resolution_percent = {
+            "480p": 100.0,
+            "1080p": 0.0,
+            "2160p": 0.0,
+        }
+        _, kg_alt4, _ = compute_total_kg_co2e(alt_assumptions4, role=role)
+
         # Current
         kg_current = kg_emitted_with_production
 
         # Create bar chart for alternatives
         behavior_order = [
             T("current_behavior"),
-            T("only_wifi"),
-            T("only_480p"),
+            T("only_wifi_only_1080p"),
+            T("only_wifi_only_480p"),
+            T("only_mobile_only_480p"),
             T("longer_device_lifetime"),
         ]
         alternative_data = pd.DataFrame(
             {
                 "Behavior": behavior_order,
-                "Emissions": [kg_current, kg_alt2, kg_alt3, kg_alt1],
+                "Emissions": [kg_current, kg_alt2, kg_alt3, kg_alt4, kg_alt1],
             }
         )
 
@@ -656,12 +684,12 @@ def render_page(role: str, assumptions: Assumptions) -> None:
                 x=alt.X(
                     "Behavior:N",
                     axis=alt.Axis(labelAngle=0, labelLimit=300, title=None),
-                    sort=behavior_order,
+                    sort=None,
                 ),
                 y=alt.Y("Emissions:Q", title=T("unit_per_year")),
                 color=alt.value("#4CAF50"),
             )
-            .properties(height=400, width=600)
+            .properties(height=400, width=800)
         )
 
         st.altair_chart(alt_chart, use_container_width=True)
